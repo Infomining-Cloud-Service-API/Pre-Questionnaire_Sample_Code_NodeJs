@@ -1,6 +1,5 @@
 var request = require('request')
 authUrl = 'https://auth.infomining-cloud.com'
-apiUrl = 'https://api.infomining-dev.com/rest_api'
 projectId='test_prj-wtM795110'
 projectSecret='YgvrukdGQO8Gu6IH4ZH7SfVvZHaemeqT'
 accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTQxNjA5OTksImlhdCI6MTY5NDE1OTE5OSwiY29tcGFueV9pZHgiOjEzLCJwcm9qZWN0X2lkeCI6NTIsImFwaV9pbmZvIjpbeyJhcGlfdHlwZSI6MCwic3Vic2NyaWJlX3JhbmsiOjAsInN1YnNjcmliZV90eXBlIjoxfSx7ImFwaV90eXBlIjoxLCJzdWJzY3JpYmVfcmFuayI6MSwic3Vic2NyaWJlX3R5cGUiOjZ9XX0.gjcsV3mkUqIQLF8AiEgopPGIev4b7Lx0PL_T3fDwXuw'

@@ -10,8 +10,8 @@ if (require.main === module) {
 }
 
 function main() {
-    // getToken(authUrl+'/v1/auth/token', projectId, projectSecret);
-    getRefreshToken(authUrl + '/v1/auth/refresh_token', refreshToken);
+    getToken(authUrl + '/v1/auth/token', projectId, projectSecret);
+    // getRefreshToken(authUrl + '/v1/auth/refresh_token', refreshToken);
 }
 
 // ========== Issuing tokens  ==========

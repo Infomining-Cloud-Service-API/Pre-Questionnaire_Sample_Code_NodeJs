@@ -29,11 +29,11 @@ function main() {
     //     selection_id = selectionId,
     //     input_txt = 'test',
     // )
-    step1History(
-        url = apiUrl + '/v1/report/step1/history',
-        accessToken = accessToken,
-        report_id = reportId,
-    )
+    // step1History(
+    //     url = apiUrl + '/v1/report/step1/history',
+    //     accessToken = accessToken,
+    //     report_id = reportId,
+    // )
 }
 
 // ========== Step1 Scenario : Get Questions  ==========

@@ -38,6 +38,7 @@ function main() {
 
 // ========== Step1 Scenario : Get Questions  ==========
 /*
+    <parameters>
     url : /v1/step1/questions
     language_type : 'kr', 'en'(None : 'en')
 */
@@ -59,6 +60,7 @@ function step1GetQuestions(url, accessToken, language_type) {
 
 // ========== Step1 Scenario : Get Question Only One  ==========
 /*
+    <parameters>
     url : /v1/step1/question
     language_type : 'kr', 'en'(None : 'en')
     question_id : identifier of step1 question
@@ -82,6 +84,7 @@ function step1GetQuestion(url, accessToken, language_type, question_id) {
 
 // ========== Step1 Scenario : Save Step1 Report  ==========
 /*
+    <parameters>
     url : /v1/report/step1/saveReport
     report_id : identifier of report
     question_id : identifier of Step1 question
@@ -112,6 +115,7 @@ function saveStep1Report(url, accessToken, report_id, question_id, selection_id,
 
 // ========== Step1 Scenario : Step1 History  ==========
 /*
+    <parameters>
     url : /v1/report/step1/history
     report_id : identifier of report
 */

@@ -26,6 +26,7 @@ function main() {
 
 // ========== Get Report : Get Summary Report info  ==========
 /*
+    <parameters>
     url : /v1/report/get_summary_report_info
     accessToken : OAuth2.0 accessToken (auth.py > getToken())
     report_id : identifier of report
@@ -50,6 +51,7 @@ function getSummaryReportInfo(url, accessToken, report_id, report_type) {
 
 // ========== Get Report : Get Summary Report Storage info  ==========
 /*
+    <parameters>
     url : /v1/report/get_summary_report_storage_info
     accessToken : OAuth2.0 accessToken (auth.py > getToken())
     report_id : identifier of report

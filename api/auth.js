@@ -16,6 +16,7 @@ function main() {
 
 // ========== Issuing tokens  ==========
 /*
+    <parameters>
     url : /v1/auth/token
     projectId : project ID
     proejctSecret : project secret key
@@ -36,6 +37,7 @@ function getToken(url, projectId, projectSecret){
   
 // ========== Token reissuance  ==========
 /*
+    <parameters>
     url : /v1/auth/refresh_token
     refreshToken : refreshToken
 */

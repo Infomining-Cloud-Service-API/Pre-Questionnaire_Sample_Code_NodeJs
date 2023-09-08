@@ -32,6 +32,7 @@ function main() {
 
 // ========== Generating initial report  ==========
 /*
+    <parameters>
     url : /v1/report/reportStart
 */
 function reportStart(url, accessToken) {
@@ -49,6 +50,7 @@ function reportStart(url, accessToken) {
 
 // ========== Step1 Save Report  ==========
 /*
+    <parameters>
     url : /v1/report/step1/saveReportTotal
     required : user_name, user_gender, user_age
     non-required : user_pregnant(NULL=not pregant), user_height, user_weight, user_job, user_religion

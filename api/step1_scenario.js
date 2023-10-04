@@ -4,6 +4,9 @@ accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTQxNjA5OTksImlhdCI6MTY5NDE1OTE5
 reportId = 'report_58_41ec4d60-0706-4cc1-b7bf-7a09ed890262_20230808115843'
 questionId = 'base001'
 selectionId = 'sbase000'
+user_age = 27;
+user_height = 180;
+user_weight = 70;
 
 if (require.main === module) {
     main();
@@ -29,14 +32,14 @@ function main() {
     //     selection_id = selectionId,
     //     input_txt = 'test',
     // )
-    saveStep1UserInfo(
-        url = apiUrl + '/v1/report/step1/saveReportUserInfo',
-        accessToken = accessToken,
-        report_id = reportId,
-        question_id = questionId,
-        selection_id = selectionId,
-        input_txt = 'test',
-    )
+    // saveStep1UserInfo(
+    //     url = apiUrl + '/v1/report/step1/saveReportUserInfo',
+    //     accessToken = accessToken,
+    //     report_id = reportId,
+    //     user_age = user_age,
+    //     user_height = user_height,
+    //     user_weight = user_weight,
+    // )
     // step1History(
     //     url = apiUrl + '/v1/report/step1/history',
     //     accessToken = accessToken,

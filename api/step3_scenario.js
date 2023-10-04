@@ -43,13 +43,6 @@ function main() {
     //     input_txt = null,
     //     question_type = 'subjective',
     // )
-    // saveStep3ReportFollowUp(
-    //     url = apiUrl + '/v1/report/step3/saveReportFollowup',
-    //     accessToken = accessToken,
-    //     report_id = reportId,
-    //     followup_question_id = followup_question_id,
-    //     input_txt = 'testInput',
-    // )
     // step3History(
     //     url = apiUrl + '/v1/report/step3/history',
     //     accessToken = accessToken,
@@ -178,34 +171,6 @@ function saveStep3Report(url, accessToken, report_id, question_id, followup_ques
             'Content-Type': ContentType,
         },
         qs: parameter,
-    };
-    request.post(options, function (e, response, body) {
-        console.log('response.statusCode : ' + response.statusCode);
-        console.log('response.body : ' + response.body);
-    });
-}
-
-// ========== Step3 Scenario : Save Step3 Report Follow Up ==========
-/*
-    <parameters>
-    url : /v1/report/step3/saveReportFollowup
-    accessToken : OAuth2.0 accessToken (auth.py > getToken())
-    report_id : identifier of report
-    followup_question_id : Step3 Additional Question Identifiers for Questions
-    input_txt : subjective answer
-*/
-function saveStep3ReportFollowUp(url, accessToken, report_id, followup_question_id, input_txt) {
-    const options = {
-        uri: url,
-        headers: {
-            'Authorization': 'Bearer ' + accessToken,
-            'Content-Type': ContentType,
-        },
-        qs: {
-            'report_id': report_id,
-            'followup_question_id': followup_question_id,
-            'input_txt': input_txt,
-        }
     };
     request.post(options, function (e, response, body) {
         console.log('response.statusCode : ' + response.statusCode);

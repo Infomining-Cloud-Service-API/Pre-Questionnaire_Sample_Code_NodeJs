@@ -17,12 +17,6 @@ function main() {
     //     report_id = reportId,
     //     report_type = report_type,
     // )
-    // getSummaryReportStorageInfo(
-    //     url = apiUrl + '/v1/report/get_summary_report_storage_info',
-    //     accessToken = accessToken,
-    //     report_id = reportId,
-    //     report_type = report_type,
-    // )
 }
 
 // ========== Get Report : Get Summary Report info  ==========
@@ -34,32 +28,6 @@ function main() {
     report_type : type of report(report, question)
 */
 function getSummaryReportInfo(url, accessToken, report_id, report_type) {
-    const options = {
-        uri: url,
-        headers: {
-            'Authorization': 'Bearer ' + accessToken,
-            'Content-Type': ContentType,
-        },
-        qs: {
-            'report_id': report_id,
-            'report_type': report_type,
-        }
-    };
-    request.get(options, function (e, response, body) {
-        console.log('response.statusCode : ' + response.statusCode);
-        console.log('response.body : ' + response.body);
-    });
-}
-
-// ========== Get Report : Get Summary Report Storage info  ==========
-/*
-    <parameters>
-    url : /v1/report/get_summary_report_storage_info
-    accessToken : OAuth2.0 accessToken (auth.py > getToken())
-    report_id : identifier of report
-    report_type : type of report(report, question)
-*/
-function getSummaryReportStorageInfo(url, accessToken, report_id, report_type) {
     const options = {
         uri: url,
         headers: {

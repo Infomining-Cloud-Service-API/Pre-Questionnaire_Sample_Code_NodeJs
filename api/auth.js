@@ -28,7 +28,6 @@ function getToken(url, projectId, projectSecret){
         headers: {
             'Project-Id': projectId,
             'Project-Secret': projectSecret,
-            'Content-Type': ContentType,
         },
     };
     request.post(options, function(e, response, body){
@@ -48,7 +47,6 @@ function getRefreshToken(url, refreshToken){
         uri: url,
         headers: {
             'Refresh-Token': refreshToken,
-            'Content-Type': ContentType,
         },
     };
     request.post(options, function(e, response, body){

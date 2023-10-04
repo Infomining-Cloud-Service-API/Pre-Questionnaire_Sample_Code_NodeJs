@@ -2,6 +2,7 @@ var request = require('request')
 apiUrl = 'https://api.infomining-dev.com/rest_api'
 accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTQxNjQ3NzcsImlhdCI6MTY5NDE2Mjk3NywiY29tcGFueV9pZHgiOjEzLCJwcm9qZWN0X2lkeCI6NTIsImFwaV9pbmZvIjpbeyJhcGlfdHlwZSI6MCwic3Vic2NyaWJlX3JhbmsiOjAsInN1YnNjcmliZV90eXBlIjoxfSx7ImFwaV90eXBlIjoxLCJzdWJzY3JpYmVfcmFuayI6MSwic3Vic2NyaWJlX3R5cGUiOjZ9XX0.nM8cUzHXdmJSOuL8O5lbLn2uNP5_DaaMfeoIG5AKMPg'
 reportId = 'report_58_41ec4d60-0706-4cc1-b7bf-7a09ed890262_20230808115843'
+ContentType = 'application/x-www-form-urlencoded'
 
 if (require.main === module) {
     main();
@@ -37,6 +38,7 @@ function symptoms(url, accessToken, language_type, report_id, param) {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': ContentType,
         },
         qs: {
             'language_type': language_type,
@@ -63,6 +65,7 @@ function mlSymptoms(url, accessToken, language_type, report_id, param) {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': ContentType,
         },
         qs: {
             'language_type': language_type,

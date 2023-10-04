@@ -1,6 +1,7 @@
 var request = require('request')
 apiUrl = 'https://api.infomining-dev.com/rest_api'
 accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTQxNjA5OTksImlhdCI6MTY5NDE1OTE5OSwiY29tcGFueV9pZHgiOjEzLCJwcm9qZWN0X2lkeCI6NTIsImFwaV9pbmZvIjpbeyJhcGlfdHlwZSI6MCwic3Vic2NyaWJlX3JhbmsiOjAsInN1YnNjcmliZV90eXBlIjoxfSx7ImFwaV90eXBlIjoxLCJzdWJzY3JpYmVfcmFuayI6MSwic3Vic2NyaWJlX3R5cGUiOjZ9XX0.gjcsV3mkUqIQLF8AiEgopPGIev4b7Lx0PL_T3fDwXuw'
+ContentType = 'application/x-www-form-urlencoded'
 
 if (require.main === module) {
     main();
@@ -40,6 +41,7 @@ function reportStart(url, accessToken) {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': ContentType,
         },
     };
     request.post(options, function (e, response, body) {
@@ -80,7 +82,7 @@ function saveReportTotal(url, accessToken, user_name, user_gender, user_age, use
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
-            'Content-Type': 'application/json',
+            'Content-Type': ContentType,
         },
         qs: parameter,
     };

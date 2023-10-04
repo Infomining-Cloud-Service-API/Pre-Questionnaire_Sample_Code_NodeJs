@@ -4,6 +4,7 @@ accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTQxNjA5OTksImlhdCI6MTY5NDE1OTE5
 refreshToken = 'LDTMm1hWcf/sxoaS/utwJajCqpwP4xkW89E7qWG5EbptBh1d4LiFfUlLX/WjPSVEYG3pt1KfgJLOG67eiDcm9g0wG/oq31syBv2va3elV5o1'
 reportId = 'report_58_41ec4d60-0706-4cc1-b7bf-7a09ed890262_20230808115843'
 report_type = 'report' //report, question
+ContentType = 'application/x-www-form-urlencoded'
 
 if (require.main === module) {
     main();
@@ -37,6 +38,7 @@ function getSummaryReportInfo(url, accessToken, report_id, report_type) {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': ContentType,
         },
         qs: {
             'report_id': report_id,
@@ -62,6 +64,7 @@ function getSummaryReportStorageInfo(url, accessToken, report_id, report_type) {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': ContentType,
         },
         qs: {
             'report_id': report_id,

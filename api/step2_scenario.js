@@ -5,6 +5,7 @@ reportId = 'report_58_41ec4d60-0706-4cc1-b7bf-7a09ed890262_20230808115843'
 symptom_id = 'f0c54334fa4b4d048c875e806644f02d'
 questionId = 'ss001'
 selectionId = 'ch03'
+ContentType = 'application/x-www-form-urlencoded'
 
 
 if (require.main === module) {
@@ -77,6 +78,7 @@ function symptomSelect(url, accessToken, report_id, symptom_id) {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': ContentType,
         },
         qs: {
             'report_id': report_id,
@@ -101,6 +103,7 @@ function departments(url, accessToken, language_type, report_id) {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': ContentType,
         },
         qs: {
             'language_type': language_type,
@@ -125,6 +128,7 @@ function questions(url, accessToken, language_type, symptom_id) {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': ContentType,
         },
         qs: {
             'language_type': language_type,
@@ -150,6 +154,7 @@ function question(url, accessToken, language_type, question_id, report_id) {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': ContentType,
         },
         qs: {
             'language_type': language_type,
@@ -175,6 +180,7 @@ function branchQuestion(url, accessToken, language_type, selection_id) {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': ContentType,
         },
         qs: {
             'language_type': language_type,
@@ -200,6 +206,7 @@ function saveStep2ReportObjective(url, accessToken, report_id, question_id, sele
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': ContentType,
         },
         qs: {
             'report_id': report_id,
@@ -227,6 +234,7 @@ function saveStep2ReportSubjective(url, accessToken, report_id, question_id, sel
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': ContentType,
         },
         qs: {
             'report_id': report_id,
@@ -252,6 +260,7 @@ function step2History(url, accessToken, report_id) {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': ContentType,
         },
         qs: {
             'report_id': report_id,

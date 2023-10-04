@@ -1,6 +1,7 @@
 var request = require('request')
 apiUrl = 'https://api.infomining-dev.com/rest_api'
-accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTQxNjA5OTksImlhdCI6MTY5NDE1OTE5OSwiY29tcGFueV9pZHgiOjEzLCJwcm9qZWN0X2lkeCI6NTIsImFwaV9pbmZvIjpbeyJhcGlfdHlwZSI6MCwic3Vic2NyaWJlX3JhbmsiOjAsInN1YnNjcmliZV90eXBlIjoxfSx7ImFwaV90eXBlIjoxLCJzdWJzY3JpYmVfcmFuayI6MSwic3Vic2NyaWJlX3R5cGUiOjZ9XX0.gjcsV3mkUqIQLF8AiEgopPGIev4b7Lx0PL_T3fDwXuw'
+accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTY0MDMwMTIsImlhdCI6MTY5NjQwMTIxMiwiY29tcGFueV9pZHgiOjE1LCJwcm9qZWN0X2lkeCI6NTAsImFwaV9pbmZvIjpbeyJhcGlfdHlwZSI6MCwic3Vic2NyaWJlX3JhbmsiOjEsInN1YnNjcmliZV90eXBlIjoyfV19.XojwHoWRtlMtzJzJvymJoiVyKwN6NmUIf9aoSDg2j4U'
+ContentType = 'application/x-www-form-urlencoded'
 reportId = 'report_58_41ec4d60-0706-4cc1-b7bf-7a09ed890262_20230808115843'
 questionId = 'base001'
 selectionId = 'sbase000'
@@ -144,6 +145,7 @@ function saveStep1UserInfo(url, accessToken, report_id, user_age, user_height, u
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': ContentType,
         },
         qs: parameter,
     };

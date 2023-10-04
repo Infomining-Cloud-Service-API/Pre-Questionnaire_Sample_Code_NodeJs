@@ -6,6 +6,7 @@ question_id = '628915ca33be448380c45da7ae558cb7'
 follow_up_id = '9c77d925f0e94119ba2c31a5d357d511'
 followup_question_id = 'followup_jenny123@infomining.co.kr_20230223184447'
 selection_id = '32d6f278421440e5af9568460728da76,b1c8e846027e47d7b3b70900586de50d'
+ContentType = 'application/x-www-form-urlencoded'
 
 
 if (require.main === module) {
@@ -78,6 +79,7 @@ function questions(url, accessToken, language_type, report_id) {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': ContentType,
         },
         qs: {
             'language_type': language_type,
@@ -104,6 +106,7 @@ function question(url, accessToken, language_type, question_id, report_id) {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': ContentType,
         },
         qs: {
             'language_type': language_type,
@@ -130,6 +133,7 @@ function followUp(url, accessToken, language_type, follow_up_id) {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': ContentType,
         },
         qs: {
             'language_type': language_type,
@@ -156,6 +160,7 @@ function saveStep3ReportObjective(url, accessToken, report_id, question_id, sele
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': ContentType,
         },
         qs: {
             'report_id': report_id,
@@ -183,6 +188,7 @@ function saveStep3ReportSubjective(url, accessToken, report_id, question_id, inp
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': ContentType,
         },
         qs: {
             'report_id': report_id,
@@ -210,6 +216,7 @@ function saveStep3ReportFollowUp(url, accessToken, report_id, followup_question_
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': ContentType,
         },
         qs: {
             'report_id': report_id,
@@ -235,6 +242,7 @@ function step3History(url, accessToken, report_id) {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': ContentType,
         },
         qs: {
             'report_id': report_id,
@@ -258,6 +266,7 @@ function reportEnd(url, accessToken, report_id) {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': ContentType,
         },
         qs: {
             'report_id': report_id,

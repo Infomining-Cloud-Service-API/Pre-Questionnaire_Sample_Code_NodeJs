@@ -1,7 +1,7 @@
 var request = require('request')
 apiUrl = 'https://api.infomining-dev.com/rest_api'
-accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTQxNjI4MzYsImlhdCI6MTY5NDE2MTAzNiwiY29tcGFueV9pZHgiOjEzLCJwcm9qZWN0X2lkeCI6NTIsImFwaV9pbmZvIjpbeyJhcGlfdHlwZSI6MCwic3Vic2NyaWJlX3JhbmsiOjAsInN1YnNjcmliZV90eXBlIjoxfSx7ImFwaV90eXBlIjoxLCJzdWJzY3JpYmVfcmFuayI6MSwic3Vic2NyaWJlX3R5cGUiOjZ9XX0.3NMPtRVRWhXumTs_A9T7tnjBrnXrRB2EYa_NxlijRgU'
-reportId = 'report_58_41ec4d60-0706-4cc1-b7bf-7a09ed890262_20230808115843'
+accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTY0MDQzMjMsImlhdCI6MTY5NjQwMjUyMywiY29tcGFueV9pZHgiOjE1LCJwcm9qZWN0X2lkeCI6NTAsImFwaV9pbmZvIjpbeyJhcGlfdHlwZSI6MCwic3Vic2NyaWJlX3JhbmsiOjEsInN1YnNjcmliZV90eXBlIjoyfV19.9hRYs2FkDpIL-6AMzlGoNVJHCugaCGCfXoztU85XRh0'
+reportId = 'report_tel_test_user7@infomining.co.kr_20230905042724'
 symptom_id = 'f0c54334fa4b4d048c875e806644f02d'
 questionId = 'ss001'
 selectionId = 'ch03'
@@ -44,20 +44,14 @@ function main() {
     //     language_type = 'kr',
     //     selection_id = selectionId,
     // )
-    // saveStep2ReportObjective(
-    //     url = apiUrl + '/v1/report/step2/saveReportObjective',
+    // saveStep2Report(
+    //     url = apiUrl + '/v1/report/step2/saveReport',
     //     accessToken = accessToken,
     //     report_id = reportId,
     //     question_id = questionId,
     //     selection_id = selectionId,
-    // )
-    // saveStep2ReportSubjective(
-    //     url = apiUrl + '/v1/report/step2/saveReportSubjective',
-    //     accessToken = accessToken,
-    //     report_id = reportId,
-    //     question_id = questionId,
-    //     selection_id = selectionId,
-    //     input_txt = '주관식답변테스트',
+    //     input_txt = 'text',
+    //     qusetion_type = 'objective',
     // )
     // step2History(
     //     url = apiUrl + '/v1/report/step2/history',
@@ -193,55 +187,35 @@ function branchQuestion(url, accessToken, language_type, selection_id) {
     });
 }
 
-// ========== Step2 Scenario : Save Step2 Report Objective ==========
+// ========== Step2 Scenario : Save Step2 Report ==========
 /*
     <parameters>
-    url : /v1/report/step2/saveReportObjective
+    url : /v1/report/step2/saveReport
     report_id : identifier of report
     question_id : identifier of question
     selection_id : identifier of Step2 Selection 
+    input_txt : Answers to subjective questions
+    question_type : Type of question to save(objective)
 */
-function saveStep2ReportObjective(url, accessToken, report_id, question_id, selection_id) {
+function saveStep2Report(url, accessToken, report_id, question_id, selection_id, input_txt, question_type) {
+    parameter = {
+        'report_id': report_id,
+        'question_id': question_id,
+        'question_type': question_type,
+    }
+    if (selection_id != null) {
+        parameter['selection_id'] = selection_id;
+    }
+    if (input_txt != null) {
+        parameter['input_txt'] = input_txt;
+    }
     const options = {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
             'Content-Type': ContentType,
         },
-        qs: {
-            'report_id': report_id,
-            'question_id': question_id,
-            'selection_id': selection_id,
-        }
-    };
-    request.post(options, function (e, response, body) {
-        console.log('response.statusCode : ' + response.statusCode);
-        console.log('response.body : ' + response.body);
-    });
-}
-
-// ========== Step2 Scenario : Save Step2 Report Subjective ==========
-/*
-    <parameters>
-    url : /v1/report/step2/saveReportSubjective
-    report_id : identifier of report
-    question_id : identifier of question
-    selection_id : identifier of Step2 Selection 
-    input_txt : Content of Step2 Selection
-*/
-function saveStep2ReportSubjective(url, accessToken, report_id, question_id, selection_id, input_txt) {
-    const options = {
-        uri: url,
-        headers: {
-            'Authorization': 'Bearer ' + accessToken,
-            'Content-Type': ContentType,
-        },
-        qs: {
-            'report_id': report_id,
-            'question_id': question_id,
-            'selection_id': selection_id,
-            'input_txt': input_txt,
-        }
+        qs: parameter,
     };
     request.post(options, function (e, response, body) {
         console.log('response.statusCode : ' + response.statusCode);

@@ -1,6 +1,6 @@
 var request = require('request')
 apiUrl = 'https://api.infomining-dev.com/rest_api'
-accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTQxNjI4MzYsImlhdCI6MTY5NDE2MTAzNiwiY29tcGFueV9pZHgiOjEzLCJwcm9qZWN0X2lkeCI6NTIsImFwaV9pbmZvIjpbeyJhcGlfdHlwZSI6MCwic3Vic2NyaWJlX3JhbmsiOjAsInN1YnNjcmliZV90eXBlIjoxfSx7ImFwaV90eXBlIjoxLCJzdWJzY3JpYmVfcmFuayI6MSwic3Vic2NyaWJlX3R5cGUiOjZ9XX0.3NMPtRVRWhXumTs_A9T7tnjBrnXrRB2EYa_NxlijRgU'
+accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTY0MDQ4MzYsImlhdCI6MTY5NjQwMzAzNiwiY29tcGFueV9pZHgiOjE1LCJwcm9qZWN0X2lkeCI6NTAsImFwaV9pbmZvIjpbeyJhcGlfdHlwZSI6MCwic3Vic2NyaWJlX3JhbmsiOjEsInN1YnNjcmliZV90eXBlIjoyfV19.joOitIBW7OaXgSHdvqcG2SxMkGpZK3T1Rphj277et9c'
 reportId = 'report_58_41ec4d60-0706-4cc1-b7bf-7a09ed890262_20230808115843'
 question_id = '628915ca33be448380c45da7ae558cb7'
 follow_up_id = '9c77d925f0e94119ba2c31a5d357d511'
@@ -33,19 +33,15 @@ function main() {
     //     language_type = 'kr',
     //     follow_up_id = follow_up_id,
     // )
-    // saveStep3ReportObjective(
-    //     url = apiUrl + '/v1/report/step3/saveReportObjective',
+    // saveStep3Report(
+    //     url = apiUrl + '/v1/report/step3/saveReport',
     //     accessToken = accessToken,
     //     report_id = reportId,
     //     question_id = question_id,
+    //     followup_question_id = followup_question_id,
     //     selection_id = selection_id,
-    // )
-    // saveStep3ReportSubjective(
-    //     url = apiUrl + '/v1/report/step3/saveReportSubjective',
-    //     accessToken = accessToken,
-    //     report_id = reportId,
-    //     question_id = question_id,
-    //     input_txt = 'testInput',
+    //     input_txt = null,
+    //     question_type = 'subjective',
     // )
     // saveStep3ReportFollowUp(
     //     url = apiUrl + '/v1/report/step3/saveReportFollowup',
@@ -146,55 +142,42 @@ function followUp(url, accessToken, language_type, follow_up_id) {
     });
 }
 
-// ========== Step3 Scenario : Save Step3 Report Objective ==========
+// ========== Step3 Scenario : Save Step3 Report ==========
 /*
     <parameters>
-    url : /v1/report/step3/saveReportObjective
+    url : /v1/report/step3/saveReport
     accessToken : OAuth2.0 accessToken (auth.py > getToken())
     report_id : identifier of report
     question_id : identifier of question
-    selection_id : identifier of Step3 Selection 
+    followup_question_id : Identifier of followup question
+    selection_id : Identifier of the Step3 selection(Additional questions are subjective without selection_id)
+    input_txt : Answers to subjective questions
+    question_type : Type of question to save(objective, subjective, mixed, follow_up)
 */
-function saveStep3ReportObjective(url, accessToken, report_id, question_id, selection_id) {
+function saveStep3Report(url, accessToken, report_id, question_id, followup_question_id, selection_id, input_txt, question_type) {
+    parameter = {
+        'report_id': report_id,
+        'question_type': question_type,
+    }
+    if (question_id != null) {
+        parameter['question_id'] = question_id;
+    }
+    if (followup_question_id != null) {
+        parameter['followup_question_id'] = followup_question_id;
+    }
+    if (selection_id != null) {
+        parameter['selection_id'] = selection_id;
+    }
+    if (input_txt != null) {
+        parameter['input_txt'] = input_txt;
+    }
     const options = {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
             'Content-Type': ContentType,
         },
-        qs: {
-            'report_id': report_id,
-            'question_id': question_id,
-            'selection_id': selection_id,
-        }
-    };
-    request.post(options, function (e, response, body) {
-        console.log('response.statusCode : ' + response.statusCode);
-        console.log('response.body : ' + response.body);
-    });
-}
-
-// ========== Step3 Scenario : Save Step3 Report Subjective ==========
-/*
-    <parameters>
-    url : /v1/report/step3/saveReportSubjective
-    accessToken : OAuth2.0 accessToken (auth.py > getToken())
-    report_id : identifier of report
-    question_id : identifier of question
-    input_txt : subjective answer
-*/
-function saveStep3ReportSubjective(url, accessToken, report_id, question_id, input_txt) {
-    const options = {
-        uri: url,
-        headers: {
-            'Authorization': 'Bearer ' + accessToken,
-            'Content-Type': ContentType,
-        },
-        qs: {
-            'report_id': report_id,
-            'question_id': question_id,
-            'input_txt': input_txt,
-        }
+        qs: parameter,
     };
     request.post(options, function (e, response, body) {
         console.log('response.statusCode : ' + response.statusCode);

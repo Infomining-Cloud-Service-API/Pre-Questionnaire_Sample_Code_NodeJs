@@ -29,6 +29,14 @@ function main() {
     //     selection_id = selectionId,
     //     input_txt = 'test',
     // )
+    saveStep1UserInfo(
+        url = apiUrl + '/v1/report/step1/saveReportUserInfo',
+        accessToken = accessToken,
+        report_id = reportId,
+        question_id = questionId,
+        selection_id = selectionId,
+        input_txt = 'test',
+    )
     // step1History(
     //     url = apiUrl + '/v1/report/step1/history',
     //     accessToken = accessToken,
@@ -99,6 +107,35 @@ function saveStep1Report(url, accessToken, report_id, question_id, selection_id,
     }
     if (input_txt != null) {
         parameter['input_txt'] = input_txt;
+    }
+    const options = {
+        uri: url,
+        headers: {
+            'Authorization': 'Bearer ' + accessToken,
+        },
+        qs: parameter,
+    };
+    request.post(options, function (e, response, body) {
+        console.log('response.statusCode : ' + response.statusCode);
+        console.log('response.body : ' + response.body);
+    });
+}
+
+// ========== Step1 Scenario : Save Step1 User Info  ==========
+/*
+    <parameters>
+    url : /v1/report/step1/saveReportUserInfo
+    report_id : identifier of report
+    user_age : Age of user
+    user_height : Height of user
+    user_weight : Weight of user
+*/
+function saveStep1UserInfo(url, accessToken, report_id, user_age, user_height, user_weight) {
+    parameter = {
+        'report_id': report_id,
+        'user_age': user_age,
+        'user_height': user_height,
+        'user_weight': user_weight,
     }
     const options = {
         uri: url,

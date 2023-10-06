@@ -1,10 +1,16 @@
 var request = require('request')
+var baseResponseModel = require('../model/base_response_model')
+var step2QuestionResponseModel = require('../model/step2/step2_question_response_model')
+var step2TotalResponseModel = require('../model/step2/step2_total_response_model')
+var step2ReportResponseModel = require('../model/step2/step2_report_response_model')
+var step2DepartmentsResponseModel = require('../model/step2/step2_departments_response_model')
+var statusResponseModel = require('../model/status_response_model')
 apiUrl = 'https://api.infomining-dev.com/rest_api'
-accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTY0MDQzMjMsImlhdCI6MTY5NjQwMjUyMywiY29tcGFueV9pZHgiOjE1LCJwcm9qZWN0X2lkeCI6NTAsImFwaV9pbmZvIjpbeyJhcGlfdHlwZSI6MCwic3Vic2NyaWJlX3JhbmsiOjEsInN1YnNjcmliZV90eXBlIjoyfV19.9hRYs2FkDpIL-6AMzlGoNVJHCugaCGCfXoztU85XRh0'
-reportId = 'report_tel_test_user7@infomining.co.kr_20230905042724'
+accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTY1OTUzMjksImlhdCI6MTY5NjU5MzUyOSwiY29tcGFueV9pZHgiOjE1LCJwcm9qZWN0X2lkeCI6NTAsImFwaV9pbmZvIjpbeyJhcGlfdHlwZSI6MCwic3Vic2NyaWJlX3JhbmsiOjEsInN1YnNjcmliZV90eXBlIjoyfV19.4V6vaO0FNLuS9BLjnnoYp5KhfO4YgmxIdExm7Anb3eM'
+reportId = 'report_58_41ec4d60-0706-4cc1-b7bf-7a09ed890262_20230808115843'
 symptom_id = 'f0c54334fa4b4d048c875e806644f02d'
 questionId = 'ss001'
-selectionId = 'ch03'
+selectionId = 'ch01'
 ContentType = 'application/x-www-form-urlencoded'
 
 
@@ -50,7 +56,7 @@ function main() {
     //     report_id = reportId,
     //     question_id = questionId,
     //     selection_id = selectionId,
-    //     input_txt = 'text',
+    //     input_txt = null,
     //     qusetion_type = 'objective',
     // )
     // step2History(
@@ -80,8 +86,8 @@ function symptomSelect(url, accessToken, report_id, symptom_id) {
         }
     };
     request.post(options, function (e, response, body) {
-        console.log('response.statusCode : ' + response.statusCode);
-        console.log('response.body : ' + response.body);
+        const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), statusResponseModel.StatusResponseModel);
+        console.log(JSON.stringify(base));
     });
 }
 
@@ -105,8 +111,8 @@ function departments(url, accessToken, language_type, report_id) {
         }
     };
     request.get(options, function (e, response, body) {
-        console.log('response.statusCode : ' + response.statusCode);
-        console.log('response.body : ' + response.body);
+        const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), step2DepartmentsResponseModel.Step2DepartmentsResponseModel);
+        console.log(JSON.stringify(base));
     });
 }
 
@@ -130,8 +136,8 @@ function questions(url, accessToken, language_type, symptom_id) {
         }
     };
     request.get(options, function (e, response, body) {
-        console.log('response.statusCode : ' + response.statusCode);
-        console.log('response.body : ' + response.body);
+        const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), step2QuestionResponseModel.Step2QuestionResponseModel, true);
+        console.log(JSON.stringify(base));
     });
 }
 
@@ -157,8 +163,8 @@ function question(url, accessToken, language_type, question_id, report_id) {
         }
     };
     request.get(options, function (e, response, body) {
-        console.log('response.statusCode : ' + response.statusCode);
-        console.log('response.body : ' + response.body);
+        const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), step2TotalResponseModel.Step2TotalResponseModel);
+        console.log(JSON.stringify(base));
     });
 }
 
@@ -182,8 +188,8 @@ function branchQuestion(url, accessToken, language_type, selection_id) {
         }
     };
     request.get(options, function (e, response, body) {
-        console.log('response.statusCode : ' + response.statusCode);
-        console.log('response.body : ' + response.body);
+        const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), step2QuestionResponseModel.Step2QuestionResponseModel);
+        console.log(JSON.stringify(base));
     });
 }
 
@@ -208,7 +214,7 @@ function saveStep2Report(url, accessToken, report_id, question_id, selection_id,
     }
     if (input_txt != null) {
         parameter['input_txt'] = input_txt;
-    }
+    } 
     const options = {
         uri: url,
         headers: {
@@ -218,8 +224,8 @@ function saveStep2Report(url, accessToken, report_id, question_id, selection_id,
         qs: parameter,
     };
     request.post(options, function (e, response, body) {
-        console.log('response.statusCode : ' + response.statusCode);
-        console.log('response.body : ' + response.body);
+        const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), statusResponseModel.StatusResponseModel);
+        console.log(JSON.stringify(base));
     });
 }
 
@@ -241,7 +247,7 @@ function step2History(url, accessToken, report_id) {
         }
     };
     request.get(options, function (e, response, body) {
-        console.log('response.statusCode : ' + response.statusCode);
-        console.log('response.body : ' + response.body);
+        const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), step2ReportResponseModel.Step2ReportResponseModel, true);
+        console.log(JSON.stringify(base));
     });
 }

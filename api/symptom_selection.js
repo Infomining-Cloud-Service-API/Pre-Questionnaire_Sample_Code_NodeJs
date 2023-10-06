@@ -1,6 +1,8 @@
 var request = require('request')
+var baseResponseModel = require('../model/base_response_model')
+var symptomResponseModel = require('../model/symptom/symptom_response_model')
 apiUrl = 'https://api.infomining-dev.com/rest_api'
-accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTQxNjQ3NzcsImlhdCI6MTY5NDE2Mjk3NywiY29tcGFueV9pZHgiOjEzLCJwcm9qZWN0X2lkeCI6NTIsImFwaV9pbmZvIjpbeyJhcGlfdHlwZSI6MCwic3Vic2NyaWJlX3JhbmsiOjAsInN1YnNjcmliZV90eXBlIjoxfSx7ImFwaV90eXBlIjoxLCJzdWJzY3JpYmVfcmFuayI6MSwic3Vic2NyaWJlX3R5cGUiOjZ9XX0.nM8cUzHXdmJSOuL8O5lbLn2uNP5_DaaMfeoIG5AKMPg'
+accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTY1OTUzMjksImlhdCI6MTY5NjU5MzUyOSwiY29tcGFueV9pZHgiOjE1LCJwcm9qZWN0X2lkeCI6NTAsImFwaV9pbmZvIjpbeyJhcGlfdHlwZSI6MCwic3Vic2NyaWJlX3JhbmsiOjEsInN1YnNjcmliZV90eXBlIjoyfV19.4V6vaO0FNLuS9BLjnnoYp5KhfO4YgmxIdExm7Anb3eM'
 reportId = 'report_58_41ec4d60-0706-4cc1-b7bf-7a09ed890262_20230808115843'
 ContentType = 'application/x-www-form-urlencoded'
 
@@ -47,8 +49,8 @@ function symptoms(url, accessToken, language_type, report_id, param) {
         }
     };
     request.get(options, function (e, response, body) {
-        console.log('response.statusCode : ' + response.statusCode);
-        console.log('response.body : ' + response.body);
+        const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), symptomResponseModel.SymptomResponseModel, true);
+        console.log(JSON.stringify(base));
     });
 }
 
@@ -74,7 +76,7 @@ function mlSymptoms(url, accessToken, language_type, report_id, param) {
         }
     };
     request.get(options, function (e, response, body) {
-        console.log('response.statusCode : ' + response.statusCode);
-        console.log('response.body : ' + response.body);
+        const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), symptomResponseModel.SymptomResponseModel, true);
+        console.log(JSON.stringify(base));
     });
 }

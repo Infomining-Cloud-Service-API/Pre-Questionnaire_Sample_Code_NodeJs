@@ -3,6 +3,9 @@ class BaseResponseModel {
     //E : parsing Class
     //list : parsing to list (true or false)
     constructor(data, E, list) {
+        if (this.timestamp != null) {
+            this.data = data;
+        }
         this.http_status = data.http_status;
         this.code = data.code;
         try {

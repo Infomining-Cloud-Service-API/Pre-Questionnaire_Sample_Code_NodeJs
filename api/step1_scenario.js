@@ -4,6 +4,7 @@ var step1QuestionResponseModel = require('../model/step1/step1_question_response
 var step1TotalResponseModel = require('../model/step1/step1_total_response_model')
 var step1ReportResponseModel = require('../model/step1/step1_report_response_model')
 var statusResponseModel = require('../model/status_response_model')
+var reportIdResponseModel = require('../model/report/report_id_response_model')
 apiUrl = 'https://api.infomining-dev.com/rest_api'
 accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTY1OTMwNzUsImlhdCI6MTY5NjU5MTI3NSwiY29tcGFueV9pZHgiOjE1LCJwcm9qZWN0X2lkeCI6NTAsImFwaV9pbmZvIjpbeyJhcGlfdHlwZSI6MCwic3Vic2NyaWJlX3JhbmsiOjEsInN1YnNjcmliZV90eXBlIjoyfV19.SezKNW06wSeoFa1Wc8CaT5YzwbjA3NjR2xkQ3klO_mM'
 ContentType = 'application/x-www-form-urlencoded'
@@ -38,14 +39,14 @@ function main() {
     //     selection_id = selectionId,
     //     input_txt = 'test',
     // )
-    // saveStep1UserInfo(
-    //     url = apiUrl + '/v1/report/step1/saveReportUserInfo',
-    //     accessToken = accessToken,
-    //     report_id = reportId,
-    //     user_age = user_age,
-    //     user_height = user_height,
-    //     user_weight = user_weight,
-    // )
+    saveStep1UserInfo(
+        url = apiUrl + '/v1/report/step1/saveReportUserInfo',
+        accessToken = accessToken,
+        report_id = reportId,
+        user_age = user_age,
+        user_height = user_height,
+        user_weight = user_weight,
+    )
     // step1History(
     //     url = apiUrl + '/v1/report/step1/history',
     //     accessToken = accessToken,
@@ -158,7 +159,7 @@ function saveStep1UserInfo(url, accessToken, report_id, user_age, user_height, u
         qs: parameter,
     };
     request.post(options, function (e, response, body) {
-        const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), statusResponseModel.StatusResponseModel);
+        const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), reportIdResponseModel.ReportIdResponseModel);
         console.log(JSON.stringify(base));
     });
 }

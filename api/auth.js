@@ -34,8 +34,7 @@ function getToken(url, projectId, projectSecret){
         },
     };
     request.post(options, function(e, response, body){
-        const base = new BaseResponseModel.BaseResponseModel(JSON.parse(response.body));
-        base.data = new AuthTokenResponseModel.AuthTokenResponseModel(base.data);
+        const base = new BaseResponseModel.BaseResponseModel(JSON.parse(response.body), AuthTokenResponseModel.AuthTokenResponseModel);
         console.log(JSON.stringify(base));
     });
 } 
@@ -55,8 +54,7 @@ function getRefreshToken(url, refreshToken){
         },
     };
     request.post(options, function(e, response, body){
-        const base = new BaseResponseModel.BaseResponseModel(JSON.parse(response.body));
-        base.data = new AuthTokenResponseModel.AuthTokenResponseModel(base.data);
+        const base = new BaseResponseModel.BaseResponseModel(JSON.parse(response.body), AuthTokenResponseModel.AuthTokenResponseModel);
         console.log(JSON.stringify(base));
     });
 }

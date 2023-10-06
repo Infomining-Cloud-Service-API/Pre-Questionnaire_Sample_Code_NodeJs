@@ -1,8 +1,8 @@
 class BaseResponseModel {
-    constructor(data) {
+    constructor(data, E) {
         this.http_status = data.http_status;
         this.code = data.code;
-        this.data = data.data;
+        this.data = new E(data.data);
         this.message = data.message;
     }
 }

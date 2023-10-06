@@ -1,6 +1,11 @@
 var request = require('request')
+var baseResponseModel = require('../model/base_response_model')
+var step1QuestionResponseModel = require('../model/step1/step1_question_response_model')
+var step1TotalResponseModel = require('../model/step1/step1_total_response_model')
+var step1ReportResponseModel = require('../model/step1/step1_report_response_model')
+var statusResponseModel = require('../model/status_response_model')
 apiUrl = 'https://api.infomining-dev.com/rest_api'
-accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTY0MDMwMTIsImlhdCI6MTY5NjQwMTIxMiwiY29tcGFueV9pZHgiOjE1LCJwcm9qZWN0X2lkeCI6NTAsImFwaV9pbmZvIjpbeyJhcGlfdHlwZSI6MCwic3Vic2NyaWJlX3JhbmsiOjEsInN1YnNjcmliZV90eXBlIjoyfV19.XojwHoWRtlMtzJzJvymJoiVyKwN6NmUIf9aoSDg2j4U'
+accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTY1OTMwNzUsImlhdCI6MTY5NjU5MTI3NSwiY29tcGFueV9pZHgiOjE1LCJwcm9qZWN0X2lkeCI6NTAsImFwaV9pbmZvIjpbeyJhcGlfdHlwZSI6MCwic3Vic2NyaWJlX3JhbmsiOjEsInN1YnNjcmliZV90eXBlIjoyfV19.SezKNW06wSeoFa1Wc8CaT5YzwbjA3NjR2xkQ3klO_mM'
 ContentType = 'application/x-www-form-urlencoded'
 reportId = 'report_58_41ec4d60-0706-4cc1-b7bf-7a09ed890262_20230808115843'
 questionId = 'base001'
@@ -59,14 +64,15 @@ function step1GetQuestions(url, accessToken, language_type) {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': ContentType,
         },
         qs: {
             'language_type': language_type,
         }
     };
     request.post(options, function (e, response, body) {
-        console.log('response.statusCode : ' + response.statusCode);
-        console.log('response.body : ' + response.body);
+        const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), step1QuestionResponseModel.Step1QuestionResponseModel, true);
+        console.log(JSON.stringify(base));
     });
 }
 
@@ -82,6 +88,7 @@ function step1GetQuestion(url, accessToken, language_type, question_id) {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': ContentType,
         },
         qs: {
             'language_type': language_type,
@@ -89,8 +96,8 @@ function step1GetQuestion(url, accessToken, language_type, question_id) {
         }
     };
     request.post(options, function (e, response, body) {
-        console.log('response.statusCode : ' + response.statusCode);
-        console.log('response.body : ' + response.body);
+        const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), step1TotalResponseModel.Step1TotalResponseModel);
+        console.log(JSON.stringify(base));
     });
 }
 
@@ -116,12 +123,13 @@ function saveStep1Report(url, accessToken, report_id, question_id, selection_id,
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': ContentType,
         },
         qs: parameter,
     };
     request.post(options, function (e, response, body) {
-        console.log('response.statusCode : ' + response.statusCode);
-        console.log('response.body : ' + response.body);
+        const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), statusResponseModel.StatusResponseModel);
+        console.log(JSON.stringify(base));
     });
 }
 
@@ -150,8 +158,8 @@ function saveStep1UserInfo(url, accessToken, report_id, user_age, user_height, u
         qs: parameter,
     };
     request.post(options, function (e, response, body) {
-        console.log('response.statusCode : ' + response.statusCode);
-        console.log('response.body : ' + response.body);
+        const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), statusResponseModel.StatusResponseModel);
+        console.log(JSON.stringify(base));
     });
 }
 
@@ -166,13 +174,14 @@ function step1History(url, accessToken, report_id) {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': ContentType,
         },
         qs: {
             'report_id': report_id,
         }
     };
     request.get(options, function (e, response, body) {
-        console.log('response.statusCode : ' + response.statusCode);
-        console.log('response.body : ' + response.body);
+        const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), step1ReportResponseModel.Step1ReportResponseModel, true);
+        console.log(JSON.stringify(base));
     });
 }

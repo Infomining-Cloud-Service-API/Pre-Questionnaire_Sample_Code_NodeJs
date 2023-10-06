@@ -1,6 +1,8 @@
 var request = require('request')
+var baseResponseModel = require('../model/base_response_model')
+var reportIdResponseModel = require('../model/report/report_id_response_model')
 apiUrl = 'https://api.infomining-dev.com/rest_api'
-accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTQxNjA5OTksImlhdCI6MTY5NDE1OTE5OSwiY29tcGFueV9pZHgiOjEzLCJwcm9qZWN0X2lkeCI6NTIsImFwaV9pbmZvIjpbeyJhcGlfdHlwZSI6MCwic3Vic2NyaWJlX3JhbmsiOjAsInN1YnNjcmliZV90eXBlIjoxfSx7ImFwaV90eXBlIjoxLCJzdWJzY3JpYmVfcmFuayI6MSwic3Vic2NyaWJlX3R5cGUiOjZ9XX0.gjcsV3mkUqIQLF8AiEgopPGIev4b7Lx0PL_T3fDwXuw'
+accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTY1NzgxNjQsImlhdCI6MTY5NjU3NjM2NCwiY29tcGFueV9pZHgiOjE1LCJwcm9qZWN0X2lkeCI6NTAsImFwaV9pbmZvIjpbeyJhcGlfdHlwZSI6MCwic3Vic2NyaWJlX3JhbmsiOjEsInN1YnNjcmliZV90eXBlIjoyfV19.HAWGQnCzoddgGasSXluZaWasx0qbEwt44VGkk-RdX-4'
 ContentType = 'application/x-www-form-urlencoded'
 
 if (require.main === module) {
@@ -45,8 +47,8 @@ function reportStart(url, accessToken) {
         },
     };
     request.post(options, function (e, response, body) {
-        console.log('response.statusCode : ' + response.statusCode);
-        console.log('response.body : ' + response.body);
+        const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), reportIdResponseModel.ReportIdResponseModel);
+        console.log(JSON.stringify(base));
     });
 }
 
@@ -87,7 +89,7 @@ function saveReportTotal(url, accessToken, user_name, user_gender, user_age, use
         qs: parameter,
     };
     request.post(options, function (e, response, body) {
-        console.log('response.statusCode : ' + response.statusCode);
-        console.log('response.body : ' + response.body);
+        const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), reportIdResponseModel.ReportIdResponseModel);
+        console.log(JSON.stringify(base));
     });
 }

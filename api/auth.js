@@ -1,5 +1,6 @@
 var request = require('request')
 var BaseResponseModel = require('../model/base_response_model')
+var AuthTokenResponseModel = require('../model/auth/auth_token_response_model')
 authUrl = 'https://auth.infomining-cloud.com'
 projectId = 'inviting_project-ZJN438549'
 projectSecret = 'JQcirsiaKRU5i850hDpywF0oyYfHvsxL'
@@ -12,7 +13,7 @@ if (require.main === module) {
 }
 
 function main() {
-    // getToken(authUrl + '/v1/auth/token', projectId, projectSecret);
+    getToken(authUrl + '/v1/auth/token', projectId, projectSecret);
     // getRefreshToken(authUrl + '/v1/auth/refresh_token', refreshToken);
 }
 
@@ -34,6 +35,7 @@ function getToken(url, projectId, projectSecret){
     };
     request.post(options, function(e, response, body){
         const base = new BaseResponseModel.BaseResponseModel(JSON.parse(response.body));
+        base.data = new AuthTokenResponseModel.AuthTokenResponseModel(base.data);
         console.log(JSON.stringify(base));
     });
 } 
@@ -54,6 +56,7 @@ function getRefreshToken(url, refreshToken){
     };
     request.post(options, function(e, response, body){
         const base = new BaseResponseModel.BaseResponseModel(JSON.parse(response.body));
+        base.data = new AuthTokenResponseModel.AuthTokenResponseModel(base.data);
         console.log(JSON.stringify(base));
     });
 }

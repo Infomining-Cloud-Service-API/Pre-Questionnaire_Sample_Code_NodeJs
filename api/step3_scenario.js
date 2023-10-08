@@ -20,26 +20,26 @@ if (require.main === module) {
 }
 
 function main() {
-    // questions(
+    // getQuestions(
     //     url = apiUrl + '/v1/step3/questions',
     //     accessToken = accessToken,
     //     language_type = 'kr',
     //     report_id = reportId,
     // )
-    // question(
+    // getQuestion(
     //     url = apiUrl + '/v1/step3/question',
     //     accessToken = accessToken,
     //     language_type = 'kr',
     //     question_id = question_id,
     //     report_id = reportId,
     // )
-    // followUp(
+    // getFollowUp(
     //     url = apiUrl + '/v1/step3/followUp',
     //     accessToken = accessToken,
     //     language_type = 'kr',
     //     follow_up_id = follow_up_id,
     // )
-    // saveStep3Report(
+    // answeraQuestion(
     //     url = apiUrl + '/v1/report/step3/saveReport',
     //     accessToken = accessToken,
     //     report_id = reportId,
@@ -49,11 +49,11 @@ function main() {
     //     input_txt = null,
     //     question_type = 'objective',
     // )
-    // step3History(
-    //     url = apiUrl + '/v1/report/step3/history',
-    //     accessToken = accessToken,
-    //     report_id = reportId,
-    // )
+    history(
+        url = apiUrl + '/v1/report/step3/history',
+        accessToken = accessToken,
+        report_id = reportId,
+    )
     // reportEnd(
     //     url = apiUrl + '/v1/report/reportEnd',
     //     accessToken = accessToken,
@@ -61,7 +61,7 @@ function main() {
     // )
 }
 
-// ========== Step3 Scenario : Questions ==========
+// ========== Step3 Scenario : Get Questions ==========
 /*
     <parameters>
     url : /v1/step3/questions
@@ -69,17 +69,20 @@ function main() {
     language_type : 'kr', 'en'(None : 'en')
     report_id : identifier of report
 */
-function questions(url, accessToken, language_type, report_id) {
+function getQuestions(url, accessToken, language_type, report_id) {
+    parameter = {
+        'report_id': report_id,
+    }
+    if (language_type != null) {
+        parameter['language_type'] = language_type;
+    }
     const options = {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
             'Content-Type': ContentType,
         },
-        qs: {
-            'language_type': language_type,
-            'report_id': report_id,
-        }
+        qs: parameter
     };
     request.get(options, function (e, response, body) {
         const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), step3QuestionResponseModel.Step3QuestionResponseModel, true);
@@ -87,7 +90,7 @@ function questions(url, accessToken, language_type, report_id) {
     });
 }
 
-// ========== Step3 Scenario : Question ==========
+// ========== Step3 Scenario : Get Question ==========
 /*
     <parameters>
     url : /v1/step3/question
@@ -96,18 +99,21 @@ function questions(url, accessToken, language_type, report_id) {
     question_id : identifier of question
     report_id : identifier of report
 */
-function question(url, accessToken, language_type, question_id, report_id) {
+function getQuestion(url, accessToken, language_type, question_id, report_id) {
+    parameter = {
+        'question_id': question_id,
+        'report_id': report_id,
+    }
+    if (language_type != null) {
+        parameter['language_type'] = language_type;
+    }
     const options = {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
             'Content-Type': ContentType,
         },
-        qs: {
-            'language_type': language_type,
-            'question_id': question_id,
-            'report_id': report_id,
-        }
+        qs: parameter
     };
     request.get(options, function (e, response, body) {
         const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), step3TotalResponseModel.Step3TotalResponseModel);
@@ -115,7 +121,7 @@ function question(url, accessToken, language_type, question_id, report_id) {
     });
 }
 
-// ========== Step3 Scenario : Follow Up ==========
+// ========== Step3 Scenario : Get Follow Up ==========
 /*
     <parameters>
     url : /v1/step3/followUp
@@ -123,17 +129,20 @@ function question(url, accessToken, language_type, question_id, report_id) {
     language_type : 'kr', 'en'(None : 'en')
     follow_up_id : Step3 Additional Question Identifiers for Questions
 */
-function followUp(url, accessToken, language_type, follow_up_id) {
+function getFollowUp(url, accessToken, language_type, follow_up_id) {
+    parameter = {
+        'follow_up_id': follow_up_id,
+    }
+    if (language_type != null) {
+        parameter['language_type'] = language_type;
+    }
     const options = {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
             'Content-Type': ContentType,
         },
-        qs: {
-            'language_type': language_type,
-            'follow_up_id': follow_up_id,
-        }
+        qs: parameter
     };
     request.get(options, function (e, response, body) {
         const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), step3FollowUpResponseModel.Step3FollowUpResponseModel);
@@ -141,10 +150,10 @@ function followUp(url, accessToken, language_type, follow_up_id) {
     });
 }
 
-// ========== Step3 Scenario : Save Step3 Report ==========
+// ========== Step3 Scenario : Answer a Question ==========
 /*
     <parameters>
-    url : /v1/report/step3/saveReport
+    url : /v1/report/step3/answer
     accessToken : OAuth2.0 accessToken (auth.py > getToken())
     report_id : identifier of report
     question_id : identifier of question
@@ -153,7 +162,7 @@ function followUp(url, accessToken, language_type, follow_up_id) {
     input_txt : Answers to subjective questions
     question_type : Type of question to save(objective, subjective, mixed, follow_up)
 */
-function saveStep3Report(url, accessToken, report_id, question_id, followup_question_id, selection_id, input_txt, question_type) {
+function answeraQuestion(url, accessToken, report_id, question_id, followup_question_id, selection_id, input_txt, question_type) {
     parameter = {
         'report_id': report_id,
         'question_type': question_type,
@@ -184,14 +193,14 @@ function saveStep3Report(url, accessToken, report_id, question_id, followup_ques
     });
 }
 
-// ========== Step3 Scenario : Step3 History ==========
+// ========== Step3 Scenario : History ==========
 /*
     <parameters>
     url : /v1/report/step3/history
     accessToken : OAuth2.0 accessToken (auth.py > getToken())
     report_id : identifier of report
 */
-function step3History(url, accessToken, report_id) {
+function history(url, accessToken, report_id) {
     const options = {
         uri: url,
         headers: {

@@ -25,6 +25,18 @@ function main() {
     //     report_id = reportId,
     //     param = '배가',
     // )
+    // symptomSelect(
+    //     url = apiUrl + '/v1/report/step2/symptomSelect',
+    //     accessToken = accessToken,
+    //     report_id = reportId,
+    //     symptom_id = symptom_id,
+    // )
+    // getDepartments(
+    //     url = apiUrl + '/v1/step2/departments',
+    //     accessToken = accessToken,
+    //     language_type = 'kr',
+    //     report_id = reportId,
+    // )
 }
 
 // ========== Symptom Selection : Symptoms ==========
@@ -36,17 +48,20 @@ function main() {
     param : search keyword
 */
 function symptoms(url, accessToken, language_type, report_id, param) {
+    parameter = {
+        'report_id': report_id,
+        'param': param,
+    }
+    if (language_type != null) {
+        parameter['language_type'] = language_type;
+    }
     const options = {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
             'Content-Type': ContentType,
         },
-        qs: {
-            'language_type': language_type,
-            'report_id': report_id,
-            'param': param,
-        }
+        qs: parameter
     };
     request.get(options, function (e, response, body) {
         const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), symptomResponseModel.SymptomResponseModel, true);
@@ -63,6 +78,35 @@ function symptoms(url, accessToken, language_type, report_id, param) {
     param : search keyword
 */
 function mlSymptoms(url, accessToken, language_type, report_id, param) {
+    parameter = {
+        'report_id': report_id,
+        'param': param,
+    }
+    if (language_type != null) {
+        parameter['language_type'] = language_type;
+    }
+    const options = {
+        uri: url,
+        headers: {
+            'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': ContentType,
+        },
+        qs: parameter
+    };
+    request.get(options, function (e, response, body) {
+        const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), symptomResponseModel.SymptomResponseModel, true);
+        console.log(JSON.stringify(base));
+    });
+}
+
+// ========== Symptom Selection : Symptom Select ==========
+/*
+    <parameters>
+    url : /v1/report/symptom/symptomSelect
+    report_id : identifier of report
+    symptom_id : identifier of symptom
+*/
+function symptomSelect(url, accessToken, report_id, symptom_id) {
     const options = {
         uri: url,
         headers: {
@@ -70,13 +114,40 @@ function mlSymptoms(url, accessToken, language_type, report_id, param) {
             'Content-Type': ContentType,
         },
         qs: {
-            'language_type': language_type,
             'report_id': report_id,
-            'param': param,
+            'symptom_id': symptom_id,
         }
     };
+    request.post(options, function (e, response, body) {
+        const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), statusResponseModel.StatusResponseModel);
+        console.log(JSON.stringify(base));
+    });
+}
+
+// ========== Symptom Selection : Departments ==========
+/*
+    <parameters>
+    url : /v1/symptom/departments
+    language_type : 'kr', 'en'(None : 'en')
+    report_id : identifier of report
+*/
+function getDepartments(url, accessToken, language_type, report_id) {
+    parameter = {
+        'report_id': report_id,
+    }
+    if (language_type != null) {
+        parameter['language_type'] = language_type;
+    }
+    const options = {
+        uri: url,
+        headers: {
+            'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': ContentType,
+        },
+        qs: parameter
+    };
     request.get(options, function (e, response, body) {
-        const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), symptomResponseModel.SymptomResponseModel, true);
+        const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), step2DepartmentsResponseModel.Step2DepartmentsResponseModel);
         console.log(JSON.stringify(base));
     });
 }

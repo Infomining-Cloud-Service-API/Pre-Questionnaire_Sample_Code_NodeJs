@@ -19,38 +19,26 @@ if (require.main === module) {
 }
 
 function main() {
-    // symptomSelect(
-    //     url = apiUrl + '/v1/report/step2/symptomSelect',
-    //     accessToken = accessToken,
-    //     report_id = reportId,
-    //     symptom_id = symptom_id,
-    // )
-    // departments(
-    //     url = apiUrl + '/v1/step2/departments',
-    //     accessToken = accessToken,
-    //     language_type = 'kr',
-    //     report_id = reportId,
-    // )
-    // questions(
+    // getQuestions(
     //     url = apiUrl + '/v1/step2/questions',
     //     accessToken = accessToken,
     //     language_type = 'kr',
     //     symptom_id = symptom_id,
     // )
-    // question(
+    // getQuestion(
     //     url = apiUrl + '/v1/step2/question',
     //     accessToken = accessToken,
     //     language_type = 'kr',
     //     question_id = questionId,
     //     report_id = reportId,
     // )
-    // branchQuestion(
+    // getBranchQuestion(
     //     url = apiUrl + '/v1/step2/branchQuestion',
     //     accessToken = accessToken,
     //     language_type = 'kr',
     //     selection_id = selectionId,
     // )
-    // saveStep2Report(
+    // answeraQuestion(
     //     url = apiUrl + '/v1/report/step2/saveReport',
     //     accessToken = accessToken,
     //     report_id = reportId,
@@ -59,81 +47,34 @@ function main() {
     //     input_txt = null,
     //     qusetion_type = 'objective',
     // )
-    // step2History(
+    // history(
     //     url = apiUrl + '/v1/report/step2/history',
     //     accessToken = accessToken,
     //     report_id = reportId,
     // )
 }
 
-// ========== Step2 Scenario : Symptom Select ==========
-/*
-    <parameters>
-    url : /v1/report/step2/symptomSelect
-    report_id : identifier of report
-    symptom_id : identifier of symptom
-*/
-function symptomSelect(url, accessToken, report_id, symptom_id) {
-    const options = {
-        uri: url,
-        headers: {
-            'Authorization': 'Bearer ' + accessToken,
-            'Content-Type': ContentType,
-        },
-        qs: {
-            'report_id': report_id,
-            'symptom_id': symptom_id,
-        }
-    };
-    request.post(options, function (e, response, body) {
-        const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), statusResponseModel.StatusResponseModel);
-        console.log(JSON.stringify(base));
-    });
-}
-
-// ========== Step2 Scenario : Departments ==========
-/*
-    <parameters>
-    url : /v1/step2/departments
-    language_type : 'kr', 'en'(None : 'en')
-    report_id : identifier of report
-*/
-function departments(url, accessToken, language_type, report_id) {
-    const options = {
-        uri: url,
-        headers: {
-            'Authorization': 'Bearer ' + accessToken,
-            'Content-Type': ContentType,
-        },
-        qs: {
-            'language_type': language_type,
-            'report_id': report_id,
-        }
-    };
-    request.get(options, function (e, response, body) {
-        const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), step2DepartmentsResponseModel.Step2DepartmentsResponseModel);
-        console.log(JSON.stringify(base));
-    });
-}
-
-// ========== Step2 Scenario : Questions ==========
+// ========== Step2 Scenario : Get Questions ==========
 /*
     <parameters>
     url : /v1/step2/questions
     language_type : 'kr', 'en'(None : 'en')
     symptom_id : identifier of symptom
 */
-function questions(url, accessToken, language_type, symptom_id) {
+function getQuestions(url, accessToken, language_type, symptom_id) {
+    parameter = {
+        'symptom_id': symptom_id,
+    }
+    if (language_type != null) {
+        parameter['language_type'] = language_type;
+    } 
     const options = {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
             'Content-Type': ContentType,
         },
-        qs: {
-            'language_type': language_type,
-            'symptom_id': symptom_id,
-        }
+        qs: parameter
     };
     request.get(options, function (e, response, body) {
         const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), step2QuestionResponseModel.Step2QuestionResponseModel, true);
@@ -141,7 +82,7 @@ function questions(url, accessToken, language_type, symptom_id) {
     });
 }
 
-// ========== Step2 Scenario : Question ==========
+// ========== Step2 Scenario : Get Question ==========
 /*
     <parameters>
     url : /v1/step2/question
@@ -149,18 +90,21 @@ function questions(url, accessToken, language_type, symptom_id) {
     question_id : identifier of question
     report_id : identifier of report
 */
-function question(url, accessToken, language_type, question_id, report_id) {
+function getQuestion(url, accessToken, language_type, question_id, report_id) {
+    parameter = {
+        'question_id': question_id,
+        'report_id': report_id,
+    }
+    if (language_type != null) {
+        parameter['language_type'] = language_type;
+    } 
     const options = {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
             'Content-Type': ContentType,
         },
-        qs: {
-            'language_type': language_type,
-            'question_id': question_id,
-            'report_id': report_id,
-        }
+        qs: parameter
     };
     request.get(options, function (e, response, body) {
         const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), step2TotalResponseModel.Step2TotalResponseModel);
@@ -168,24 +112,27 @@ function question(url, accessToken, language_type, question_id, report_id) {
     });
 }
 
-// ========== Step2 Scenario : Branch Question ==========
+// ========== Step2 Scenario : Get Branch Question ==========
 /*
     <parameters>
     url : /v1/step2/question
     language_type : 'kr', 'en'(None : 'en')
     selection_id : identifier of Step2 Selection 
 */
-function branchQuestion(url, accessToken, language_type, selection_id) {
+function getBranchQuestion(url, accessToken, language_type, selection_id) {
+    parameter = {
+        'selection_id': selection_id,
+    }
+    if (language_type != null) {
+        parameter['language_type'] = language_type;
+    }
     const options = {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
             'Content-Type': ContentType,
         },
-        qs: {
-            'language_type': language_type,
-            'selection_id': selection_id,
-        }
+        qs: parameter
     };
     request.get(options, function (e, response, body) {
         const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), step2QuestionResponseModel.Step2QuestionResponseModel);
@@ -193,17 +140,17 @@ function branchQuestion(url, accessToken, language_type, selection_id) {
     });
 }
 
-// ========== Step2 Scenario : Save Step2 Report ==========
+// ========== Step2 Scenario : Answer a Question ==========
 /*
     <parameters>
-    url : /v1/report/step2/saveReport
+    url : /v1/report/step2/answer
     report_id : identifier of report
     question_id : identifier of question
     selection_id : identifier of Step2 Selection 
     input_txt : Answers to subjective questions
     question_type : Type of question to save(objective)
 */
-function saveStep2Report(url, accessToken, report_id, question_id, selection_id, input_txt, question_type) {
+function answeraQuestion(url, accessToken, report_id, question_id, selection_id, input_txt, question_type) {
     parameter = {
         'report_id': report_id,
         'question_id': question_id,
@@ -229,13 +176,13 @@ function saveStep2Report(url, accessToken, report_id, question_id, selection_id,
     });
 }
 
-// ========== Step2 Scenario : Step2 History ==========
+// ========== Step2 Scenario : History ==========
 /*
     <parameters>
    url : /v1/report/step2/history
     report_id : identifier of report
 */
-function step2History(url, accessToken, report_id) {
+function history(url, accessToken, report_id) {
     const options = {
         uri: url,
         headers: {

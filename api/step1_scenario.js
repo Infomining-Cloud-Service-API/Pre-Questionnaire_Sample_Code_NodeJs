@@ -61,15 +61,17 @@ function main() {
     language_type : 'kr', 'en'(None : 'en')
 */
 function step1GetQuestions(url, accessToken, language_type) {
+    parameter = {}
+    if (language_type != null) {
+        parameter['language_type'] = language_type;
+    } 
     const options = {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
             'Content-Type': ContentType,
         },
-        qs: {
-            'language_type': language_type,
-        }
+        qs: parameter
     };
     request.post(options, function (e, response, body) {
         const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), step1QuestionResponseModel.Step1QuestionResponseModel, true);
@@ -85,16 +87,19 @@ function step1GetQuestions(url, accessToken, language_type) {
     question_id : identifier of step1 question
 */
 function step1GetQuestion(url, accessToken, language_type, question_id) {
+    parameter = {
+        'question_id': question_id,
+    }
+    if (language_type != null) {
+        parameter['language_type'] = language_type;
+    } 
     const options = {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
             'Content-Type': ContentType,
         },
-        qs: {
-            'language_type': language_type,
-            'question_id': question_id,
-        }
+        qs: parameter
     };
     request.post(options, function (e, response, body) {
         const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), step1TotalResponseModel.Step1TotalResponseModel);

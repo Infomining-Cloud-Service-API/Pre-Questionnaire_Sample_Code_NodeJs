@@ -34,7 +34,6 @@ function getReport(url, accessToken, report_id, report_type) {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
-            'Content-Type': ContentType,
         },
         qs: {
             'report_id': report_id,

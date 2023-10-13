@@ -13,23 +13,23 @@ if (require.main === module) {
 }
 
 function main() {
-    // getSummaryReportInfo(
-    //     url = apiUrl + '/v1/report/get_summary_report_info',
-    //     accessToken = accessToken,
-    //     report_id = reportId,
-    //     report_type = report_type,
-    // )
+    getReport(
+        url = apiUrl + '/v1/report/get_report',
+        accessToken = accessToken,
+        report_id = reportId,
+        report_type = report_type,
+    )
 }
 
-// ========== Get Report : Get Summary Report info  ==========
+// ========== Get Report : Get Report  ==========
 /*
     <parameters>
-    url : /v1/report/get_summary_report_info
+    url : /v1/report/get_report
     accessToken : OAuth2.0 accessToken (auth.py > getToken())
     report_id : identifier of report
     report_type : type of report(report, question)
 */
-function getSummaryReportInfo(url, accessToken, report_id, report_type) {
+function getReport(url, accessToken, report_id, report_type) {
     const options = {
         uri: url,
         headers: {

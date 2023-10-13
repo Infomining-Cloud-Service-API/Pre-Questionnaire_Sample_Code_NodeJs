@@ -8,7 +8,26 @@ class Step2QuestionResponseModel {
         this.step2_max_selection_count = data.step2_max_selection_count;  // Maximum number of choices for optional questions
         this.step2_branch_bool = data.step2_branch_bool;  // Whether of scenario questions
 
-        this.step2_img_array = data.step2_img_array; // Step2 Sample image list when image type question
+        // Step2 Sample image list when image type question
+        try {
+            let res = []
+            for (let i = 0; i < data.step2_img_array.length; i++) {
+                res.push(data.step2_img_array[i]);
+            }
+            this.step2_img_array = res;
+        } catch (e) {
+            this.step2_img_array = null;
+        }
+        // Step2 Guide image list when image type question
+        try {
+            let res = []
+            for (let i = 0; i < data.step2_guide_img_array.length; i++) {
+                res.push(data.step2_guide_img_array[i]);
+            }
+            this.step2_guide_img_array = res;
+        } catch (e) {
+            this.step2_guide_img_array = null;
+        }
     }
 }
 

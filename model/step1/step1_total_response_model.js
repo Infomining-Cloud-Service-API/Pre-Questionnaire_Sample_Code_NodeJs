@@ -13,6 +13,15 @@ class Step1TotalResponseModel {
         } catch (e) {
             this.step1_selection_list = null;
         }
+        try {
+            let res = []
+            for (let i = 0; i < data.step1_sub_qusetion_list.length; i++) {
+                res.push(new step1SelectionResponseModel.Step1SelectionResponseModel(data.step1_sub_qusetion_list[i]));
+            }
+            this.step1_sub_qusetion_list = res;
+        } catch (e) {
+            this.step1_sub_qusetion_list = null;
+        }
     }
 }
 

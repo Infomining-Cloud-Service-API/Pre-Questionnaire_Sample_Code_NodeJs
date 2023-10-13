@@ -6,51 +6,50 @@ var step1ReportResponseModel = require('../model/step1/step1_report_response_mod
 var statusResponseModel = require('../model/status_response_model')
 var reportIdResponseModel = require('../model/report/report_id_response_model')
 apiUrl = 'https://api.infomining-dev.com/rest_api'
-accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTY1OTMwNzUsImlhdCI6MTY5NjU5MTI3NSwiY29tcGFueV9pZHgiOjE1LCJwcm9qZWN0X2lkeCI6NTAsImFwaV9pbmZvIjpbeyJhcGlfdHlwZSI6MCwic3Vic2NyaWJlX3JhbmsiOjEsInN1YnNjcmliZV90eXBlIjoyfV19.SezKNW06wSeoFa1Wc8CaT5YzwbjA3NjR2xkQ3klO_mM'
+accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTcxOTQ2ODYsImlhdCI6MTY5NzE5Mjg4NiwiY29tcGFueV9pZHgiOjE1LCJwcm9qZWN0X2lkeCI6NTAsImFwaV9pbmZvIjpbeyJhcGlfdHlwZSI6MCwic3Vic2NyaWJlX3JhbmsiOjEsInN1YnNjcmliZV90eXBlIjoyfV19.FqVhArMSlswetdLfJ3Ss04NfJIyebZVIaQuYnAn-0tY'
 ContentType = 'application/x-www-form-urlencoded'
+jsonContentType = 'application/json'
 reportId = 'report_58_41ec4d60-0706-4cc1-b7bf-7a09ed890262_20230808115843'
-questionId = 'base001'
+step1_question_id = 'base001'
 selectionId = 'sbase000'
 user_age = 27;
 user_height = 180;
 user_weight = 70;
+question_type = 'Objective';
 
 if (require.main === module) {
     main();
 }
 
 function main() {
-    // step1GetQuestions(
+    // getQuestions(
     //     url = apiUrl + '/v1/step1/questions',
     //     accessToken = accessToken,
     //     language_type = 'kr',
     // )
-    // step1GetQuestion(
+    // getQuestion(
     //     url = apiUrl + '/v1/step1/question',
     //     accessToken = accessToken,
     //     language_type = 'kr',
     //     question_id = questionId,
     // )
-    // saveStep1Report(
+    // answerToQuestion(
     //     url = apiUrl + '/v1/report/step1/saveReport',
     //     accessToken = accessToken,
     //     report_id = reportId,
-    //     question_id = questionId,
-    //     selection_id = selectionId,
-    //     input_txt = 'test',
+    //     step1_question_id = step1_question_id,
+    //     // selection_id = selectionId,
+    //     // input_txt = 'test',
+    //     question_type = question_type,
     // )
-    saveStep1UserInfo(
-        url = apiUrl + '/v1/report/step1/saveReportUserInfo',
-        accessToken = accessToken,
-        report_id = reportId,
-        user_age = user_age,
-        user_height = user_height,
-        user_weight = user_weight,
-    )
-    // step1History(
-    //     url = apiUrl + '/v1/report/step1/history',
-    //     accessToken = accessToken,
-    //     report_id = reportId,
+    // answerToQuestions(
+    //     url = apiUrl + '/v1/report/step1/answers',
+    //     report_id = report_id,
+    //     answers = answers,
+    //     question_id = question_id,
+    //     // selection_id = selection_id,
+    //     // input_txt = input_txt,
+    //     question_type = question_type,
     // )
 }
 
@@ -60,7 +59,7 @@ function main() {
     url : /v1/step1/questions
     language_type : 'kr', 'en'(None : 'en')
 */
-function step1GetQuestions(url, accessToken, language_type) {
+function getQuestions(url, accessToken, language_type) {
     parameter = {}
     if (language_type != null) {
         parameter['language_type'] = language_type;
@@ -79,14 +78,14 @@ function step1GetQuestions(url, accessToken, language_type) {
     });
 }
 
-// ========== Step1 Scenario : Get Question Only One  ==========
+// ========== Step1 Scenario : Get Question  ==========
 /*
     <parameters>
     url : /v1/step1/question
     language_type : 'kr', 'en'(None : 'en')
     question_id : identifier of step1 question
 */
-function step1GetQuestion(url, accessToken, language_type, question_id) {
+function getQuestion(url, accessToken, language_type, question_id) {
     parameter = {
         'question_id': question_id,
     }
@@ -107,20 +106,24 @@ function step1GetQuestion(url, accessToken, language_type, question_id) {
     });
 }
 
-// ========== Step1 Scenario : Save Step1 Report  ==========
+// ========== Step1 Scenario : Answer To Question  ==========
 /*
     <parameters>
-    url : /v1/report/step1/saveReport
+    url : /v1/report/step1/answer
     report_id : identifier of report
-    question_id : identifier of Step1 question
+    step1_question_id : identifier of Step1 question
     selection_id : identifier of Step1 Selection 
     input_txt : Content of Step1 Selection (Exists only when subjective)
+    question_type : Type of question to save (answer_type value handed over by question) (Objective, Subjective, Complex-subjective)
 */
-function saveStep1Report(url, accessToken, report_id, question_id, selection_id, input_txt) {
+function answerToQuestion(url, accessToken, report_id, step1_question_id, selection_id, input_txt, question_type) {
     parameter = {
         'report_id': report_id,
-        'question_id': question_id,
-        'selection_id': selection_id,
+        'step1_question_id': step1_question_id,
+        'question_type': question_type,
+    }
+    if (selection_id != null) {
+        parameter['selection_id'] = selection_id;
     }
     if (input_txt != null) {
         parameter['input_txt'] = input_txt;
@@ -139,55 +142,40 @@ function saveStep1Report(url, accessToken, report_id, question_id, selection_id,
     });
 }
 
-// ========== Step1 Scenario : Save Step1 User Info  ==========
+// ========== Step1 Scenario : Answer To Questions  ==========
 /*
     <parameters>
-    url : /v1/report/step1/saveReportUserInfo
+    url : /v1/report/step1/answers
     report_id : identifier of report
-    user_age : Age of user
-    user_height : Height of user
-    user_weight : Weight of user
+    answers : Report Save Content List
+    question_id : identifier of Step2 question
+    selection_id : identifier of Step2 selection
+    input_txt : Answers to subjective questions
+    question_type : Type of question to save (answer_type value handed over by question) (Objective, Subjective, Complex-subjective)
 */
-function saveStep1UserInfo(url, accessToken, report_id, user_age, user_height, user_weight) {
+function answerToQuestions(url, accessToken, report_id, answers, question_id, selection_id, input_txt, question_type) {
     parameter = {
         'report_id': report_id,
-        'user_age': user_age,
-        'user_height': user_height,
-        'user_weight': user_weight,
+        'answers': answers,
+        'question_id': question_id,
+        'question_type': question_type,
+    }
+    if (selection_id != null) {
+        parameter['selection_id'] = selection_id;
+    }
+    if (input_txt != null) {
+        parameter['input_txt'] = input_txt;
     }
     const options = {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
-            'Content-Type': ContentType,
+            'Content-Type': jsonContentType,
         },
         qs: parameter,
     };
     request.post(options, function (e, response, body) {
-        const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), reportIdResponseModel.ReportIdResponseModel);
-        console.log(JSON.stringify(base));
-    });
-}
-
-// ========== Step1 Scenario : Step1 History  ==========
-/*
-    <parameters>
-    url : /v1/report/step1/history
-    report_id : identifier of report
-*/
-function step1History(url, accessToken, report_id) {
-    const options = {
-        uri: url,
-        headers: {
-            'Authorization': 'Bearer ' + accessToken,
-            'Content-Type': ContentType,
-        },
-        qs: {
-            'report_id': report_id,
-        }
-    };
-    request.get(options, function (e, response, body) {
-        const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), step1ReportResponseModel.Step1ReportResponseModel, true);
+        const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), statusResponseModel.StatusResponseModel);
         console.log(JSON.stringify(base));
     });
 }

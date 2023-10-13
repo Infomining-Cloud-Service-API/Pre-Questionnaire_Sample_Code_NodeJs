@@ -17,7 +17,7 @@ function main() {
     // getAccessTokenUsingRefreshToken(authUrl + '/v1/auth/refresh_token', refreshToken);
 }
 
-// ========== Get Access Token  ==========
+// ========== OAuth 2.0 : Get Access Token  ==========
 /*
     <parameters>
     url : /v1/auth/token
@@ -39,7 +39,7 @@ function getAccessToken(url, projectId, secretKey) {
     });
 } 
   
-// ========== Get Access Token Using Refresh Token  ==========
+// ========== OAuth 2.0 : Get Access Token Using Refresh Token  ==========
 /*
     <parameters>
     url : /v1/auth/refresh_token

@@ -30,7 +30,7 @@ function main() {
     // )
 }
 
-// ========== Report Start  ==========
+// ========== Preparation Scenario : Report Start  ==========
 /*
     <parameters>
     url : /v1/report/reportStart
@@ -49,7 +49,7 @@ function reportStart(url, accessToken) {
     });
 }
 
-// ========== Report Start With Profile  ==========
+// ========== Preparation Scenario : Report Start With Profile  ==========
 /*
     <parameters>
     url : /v1/report/step1/reportStartWithProfile

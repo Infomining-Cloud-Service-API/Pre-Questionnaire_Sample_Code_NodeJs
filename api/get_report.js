@@ -25,7 +25,7 @@ function main() {
 /*
     <parameters>
     url : /v1/report/get_report
-    accessToken : OAuth2.0 accessToken (auth.py > getToken())
+    accessToken : OAuth2.0 accessToken (auth.js > getAccessToken())
     report_id : identifier of report
     report_type : type of report(report, question)
 */

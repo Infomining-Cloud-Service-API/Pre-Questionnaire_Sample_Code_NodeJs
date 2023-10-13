@@ -66,7 +66,7 @@ function main() {
 /*
     <parameters>
     url : /v1/step3/questions
-    accessToken : OAuth2.0 accessToken (auth.py > getToken())
+    accessToken : OAuth2.0 accessToken (auth.js > getAccessToken())
     language_type : 'kr', 'en'(None : 'en')
     report_id : identifier of report
 */
@@ -95,7 +95,7 @@ function getQuestions(url, accessToken, language_type, report_id) {
 /*
     <parameters>
     url : /v1/step3/question
-    accessToken : OAuth2.0 accessToken (auth.py > getToken())
+    accessToken : OAuth2.0 accessToken (auth.js > getAccessToken())
     language_type : 'kr', 'en'(None : 'en')
     question_id : identifier of question
     report_id : identifier of report
@@ -126,7 +126,7 @@ function getQuestion(url, accessToken, language_type, question_id, report_id) {
 /*
     <parameters>
     url : /v1/step3/followUp
-    accessToken : OAuth2.0 accessToken (auth.py > getToken())
+    accessToken : OAuth2.0 accessToken (auth.js > getAccessToken())
     language_type : 'kr', 'en'(None : 'en')
     follow_up_id : Step3 Additional Question Identifiers for Questions
 */
@@ -155,7 +155,7 @@ function getFollowUp(url, accessToken, language_type, follow_up_id) {
 /*
     <parameters>
     url : /v1/report/step3/answer
-    accessToken : OAuth2.0 accessToken (auth.py > getToken())
+    accessToken : OAuth2.0 accessToken (auth.js > getAccessToken())
     report_id : identifier of report
     question_id : identifier of question
     followup_question_id : Identifier of followup question
@@ -198,7 +198,7 @@ function answerToQuestion(url, accessToken, report_id, question_id, followup_que
 /*
     <parameters>
     url : /v1/report/step3/answers
-    accessToken : OAuth2.0 accessToken (auth.py > getToken())
+    accessToken : OAuth2.0 accessToken (auth.js > getAccessToken())
     report_id : identifier of report
     answers : Report Save Content List
     question_id : identifier of question

@@ -3,9 +3,9 @@ var baseResponseModel = require('../model/base_response_model')
 var authTokenResponseModel = require('../model/auth/auth_token_response_model')
 authUrl = 'https://auth.infomining-cloud.com'
 projectId = 'inviting_project-ZJN438549'
-proejctSecret = 'JQcirsiaKRU5i850hDpywF0oyYfHvsxL'
-accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTQxNjA5OTksImlhdCI6MTY5NDE1OTE5OSwiY29tcGFueV9pZHgiOjEzLCJwcm9qZWN0X2lkeCI6NTIsImFwaV9pbmZvIjpbeyJhcGlfdHlwZSI6MCwic3Vic2NyaWJlX3JhbmsiOjAsInN1YnNjcmliZV90eXBlIjoxfSx7ImFwaV90eXBlIjoxLCJzdWJzY3JpYmVfcmFuayI6MSwic3Vic2NyaWJlX3R5cGUiOjZ9XX0.gjcsV3mkUqIQLF8AiEgopPGIev4b7Lx0PL_T3fDwXuw'
-refreshToken = '5N8lZ1GeZbdrTTGnTAy50nlqbBA5Y726zkpk2NBH71xKF3sxCBEEXQLM73QzJ3hBxzLyBPTzt1vvI4Mr+m+7KXanBVDqf3lDbJmu9KMFAQXIzPji8l/S7ab6UZ/9y3760'
+secretKey = 'JQcirsiaKRU5i850hDpywF0oyYfHvsxL'
+accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTcxOTAwNzgsImlhdCI6MTY5NzE4ODI3OCwiY29tcGFueV9pZHgiOjE1LCJwcm9qZWN0X2lkeCI6NTAsImFwaV9pbmZvIjpbeyJhcGlfdHlwZSI6MCwic3Vic2NyaWJlX3JhbmsiOjEsInN1YnNjcmliZV90eXBlIjoyfV19.5Sbk3tRiKeODNL1LlLJJSD3UOY9VSjmqq-Vs_7eGnbQ'
+refreshToken = 'IPMFUda9skBXqFcWYtdE3pmxAukzs9Bc842RVA+ceetUoDgWESWeNUUJOawenFYihGg1oGR34g90FoCEvX4CUKYetUl0plFrRRU/cmbd1mz1QZ7FNsUBWqR4QpxOMqoV0'
 ContentType = 'application/x-www-form-urlencoded'
 
 if (require.main === module) {
@@ -13,23 +13,23 @@ if (require.main === module) {
 }
 
 function main() {
-    getToken(authUrl + '/v1/auth/token', projectId, proejctSecret);
-    // getRefreshToken(authUrl + '/v1/auth/refresh_token', refreshToken);
+    getAccessToken(authUrl + '/v1/auth/token', projectId, secretKey);
+    // getAccessTokenUsingRefreshToken(authUrl + '/v1/auth/refresh_token', refreshToken);
 }
 
-// ========== Issuing tokens  ==========
+// ========== Get Access Token  ==========
 /*
     <parameters>
     url : /v1/auth/token
     projectId : project ID
-    proejctSecret : project secret key
+    secretKey : project secret key
 */
-function getToken(url, projectId, proejctSecret) {
+function getAccessToken(url, projectId, secretKey) {
     const options = {
         uri: url,
         headers: {
             'Project-Id': projectId,
-            'Secret-Key': proejctSecret,
+            'Secret-Key': secretKey,
             'Content-Type': ContentType,
         },
     };
@@ -39,13 +39,13 @@ function getToken(url, projectId, proejctSecret) {
     });
 } 
   
-// ========== Token reissuance  ==========
+// ========== Get Access Token Using Refresh Token  ==========
 /*
     <parameters>
     url : /v1/auth/refresh_token
-    refreshToken : refreshToken
+    refreshToken : refresh token value
 */
-function getRefreshToken(url, refreshToken){
+function getAccessTokenUsingRefreshToken(url, refreshToken) {
     const options = {
         uri: url,
         headers: {

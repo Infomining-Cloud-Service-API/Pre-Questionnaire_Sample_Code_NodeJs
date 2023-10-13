@@ -1,6 +1,5 @@
 class Step1QuestionResponseModel {
     constructor(data) {
-        this.step1_question_info = data.step1_question_info; // Infomation of Step 1 question
         this.step1_question_id = data.step1_question_id; // Step 1 identifier of the question
         this.step1_question_content = data.step1_question_content; // Step 1 content of the question
         this.step1_guide = data.step1_guide; // Step 1 guide of the question

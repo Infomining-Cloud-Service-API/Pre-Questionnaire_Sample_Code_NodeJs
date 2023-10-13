@@ -45,7 +45,7 @@ function main() {
     // answerToQuestions(
     //     url = apiUrl + '/v1/report/step1/answers',
     //     report_id = report_id,
-    //     answers = answers,
+    //     answers = [],
     //     question_id = question_id,
     //     // selection_id = selection_id,
     //     // input_txt = input_txt,

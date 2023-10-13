@@ -196,7 +196,7 @@ function answerToQuestion(url, accessToken, report_id, question_id, selection_id
     input_txt : Answers to subjective questions
     question_type : Type of question to save (answer_type value handed over by question) (Objective, Subjective, Complex-subjective)
 */
-function answerToQuestions(url, accessToken, report_id, question_id, selection_id, input_txt, question_type) {
+function answerToQuestions(url, accessToken, report_id, answers, question_id, selection_id, input_txt, question_type) {
     parameter = {
         'report_id': report_id,
         'answers': answers,

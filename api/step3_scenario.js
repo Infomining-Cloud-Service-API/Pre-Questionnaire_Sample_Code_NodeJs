@@ -13,6 +13,7 @@ follow_up_id = '9c77d925f0e94119ba2c31a5d357d511'
 followup_question_id = 'followup_jenny123@infomining.co.kr_20230223184447'
 selection_id = '32d6f278421440e5af9568460728da76,b1c8e846027e47d7b3b70900586de50d'
 ContentType = 'application/x-www-form-urlencoded'
+jsonContentType = 'application/json'
 
 
 if (require.main === module) {
@@ -39,8 +40,8 @@ function main() {
     //     language_type = 'kr',
     //     follow_up_id = follow_up_id,
     // )
-    // answeraQuestion(
-    //     url = apiUrl + '/v1/report/step3/saveReport',
+    // answerToQuestion(
+    //     url = apiUrl + '/v1/report/step3/answer',
     //     accessToken = accessToken,
     //     report_id = reportId,
     //     question_id = question_id,
@@ -49,15 +50,15 @@ function main() {
     //     input_txt = null,
     //     question_type = 'objective',
     // )
-    history(
-        url = apiUrl + '/v1/report/step3/history',
-        accessToken = accessToken,
-        report_id = reportId,
-    )
-    // reportEnd(
-    //     url = apiUrl + '/v1/report/reportEnd',
+    // answerToQuestions(
+    //     url = apiUrl + '/v1/report/step3/answers',
     //     accessToken = accessToken,
     //     report_id = reportId,
+    //     question_id = question_id,
+    //     followup_question_id = followup_question_id,
+    //     selection_id = selection_id,
+    //     input_txt = null,
+    //     question_type = 'objective',
     // )
 }
 
@@ -150,7 +151,7 @@ function getFollowUp(url, accessToken, language_type, follow_up_id) {
     });
 }
 
-// ========== Step3 Scenario : Answer a Question ==========
+// ========== Step3 Scenario : Answer To Question ==========
 /*
     <parameters>
     url : /v1/report/step3/answer
@@ -162,7 +163,7 @@ function getFollowUp(url, accessToken, language_type, follow_up_id) {
     input_txt : Answers to subjective questions
     question_type : Type of question to save(objective, subjective, mixed, follow_up)
 */
-function answeraQuestion(url, accessToken, report_id, question_id, followup_question_id, selection_id, input_txt, question_type) {
+function answerToQuestion(url, accessToken, report_id, question_id, followup_question_id, selection_id, input_txt, question_type) {
     parameter = {
         'report_id': report_id,
         'question_type': question_type,
@@ -193,47 +194,44 @@ function answeraQuestion(url, accessToken, report_id, question_id, followup_ques
     });
 }
 
-// ========== Step3 Scenario : History ==========
+// ========== Step3 Scenario : Answer To Questions ==========
 /*
     <parameters>
-    url : /v1/report/step3/history
+    url : /v1/report/step3/answers
     accessToken : OAuth2.0 accessToken (auth.py > getToken())
     report_id : identifier of report
+    answers : Report Save Content List
+    question_id : identifier of question
+    followup_question_id : Identifier of followup question
+    selection_id : Identifier of the Step3 selection(Additional questions are subjective without selection_id)
+    input_txt : Answers to subjective questions
+    question_type : Type of question to save(objective, subjective, mixed, follow_up)
 */
-function history(url, accessToken, report_id) {
+function answerToQuestions(url, accessToken, report_id, question_id, followup_question_id, selection_id, input_txt, question_type) {
+    parameter = {
+        'report_id': report_id,
+        'answers': answers,
+        'question_type': question_type,
+    }
+    if (question_id != null) {
+        parameter['question_id'] = question_id;
+    }
+    if (followup_question_id != null) {
+        parameter['followup_question_id'] = followup_question_id;
+    }
+    if (selection_id != null) {
+        parameter['selection_id'] = selection_id;
+    }
+    if (input_txt != null) {
+        parameter['input_txt'] = input_txt;
+    }
     const options = {
         uri: url,
         headers: {
             'Authorization': 'Bearer ' + accessToken,
-            'Content-Type': ContentType,
+            'Content-Type': jsonContentType,
         },
-        qs: {
-            'report_id': report_id,
-        }
-    };
-    request.get(options, function (e, response, body) {
-        const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), step3ReportResponseModel.Step3ReportResponseModel, true);
-        console.log(JSON.stringify(base));
-    });
-}
-
-// ========== Step3 Scenario : Report End ==========
-/*
-    <parameters>
-    url : /v1/report/reportEnd
-    accessToken : OAuth2.0 accessToken (auth.py > getToken())
-    report_id : identifier of report
-*/
-function reportEnd(url, accessToken, report_id) {
-    const options = {
-        uri: url,
-        headers: {
-            'Authorization': 'Bearer ' + accessToken,
-            'Content-Type': ContentType,
-        },
-        qs: {
-            'report_id': report_id,
-        }
+        qs: parameter,
     };
     request.post(options, function (e, response, body) {
         const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), statusResponseModel.StatusResponseModel);

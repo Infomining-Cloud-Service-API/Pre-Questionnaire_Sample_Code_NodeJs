@@ -1,6 +1,7 @@
 var request = require('request')
 var baseResponseModel = require('../model/base_response_model')
 var symptomResponseModel = require('../model/symptom/symptom_response_model')
+var step2DepartmentsResponseModel = require('../model/step2/step2_departments_response_model')
 apiUrl = 'https://api.infomining-dev.com/rest_api'
 accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTY1OTUzMjksImlhdCI6MTY5NjU5MzUyOSwiY29tcGFueV9pZHgiOjE1LCJwcm9qZWN0X2lkeCI6NTAsImFwaV9pbmZvIjpbeyJhcGlfdHlwZSI6MCwic3Vic2NyaWJlX3JhbmsiOjEsInN1YnNjcmliZV90eXBlIjoyfV19.4V6vaO0FNLuS9BLjnnoYp5KhfO4YgmxIdExm7Anb3eM'
 reportId = 'report_58_41ec4d60-0706-4cc1-b7bf-7a09ed890262_20230808115843'
@@ -11,14 +12,14 @@ if (require.main === module) {
 }
 
 function main() {
-    // symptoms(
+    // getSymptoms(
     //     url = apiUrl + '/v1/symptom/symptoms',
     //     accessToken = accessToken,
     //     language_type = 'kr',
     //     report_id = reportId,
     //     param = '배가',
     // )
-    // mlSymptoms(
+    // getMlSymptoms(
     //     url = apiUrl + '/v1/symptom/MLsymptoms',
     //     accessToken = accessToken,
     //     language_type = 'kr',
@@ -39,7 +40,7 @@ function main() {
     // )
 }
 
-// ========== Symptom Selection : Symptoms ==========
+// ========== Symptom Selection : Get Symptoms ==========
 /*
     <parameters>
     url : /v1/symptom/symptoms
@@ -47,7 +48,7 @@ function main() {
     report_id : identifier of report
     param : search keyword
 */
-function symptoms(url, accessToken, language_type, report_id, param) {
+function getSymptoms(url, accessToken, language_type, report_id, param) {
     parameter = {
         'report_id': report_id,
         'param': param,
@@ -69,7 +70,7 @@ function symptoms(url, accessToken, language_type, report_id, param) {
     });
 }
 
-// ========== Symptom Selection : ML Symptoms ==========
+// ========== Symptom Selection : Get ML Symptoms ==========
 /*
     <parameters>
     url : /v1/symptom/MLsymptoms
@@ -77,7 +78,7 @@ function symptoms(url, accessToken, language_type, report_id, param) {
     report_id : identifier of report
     param : search keyword
 */
-function mlSymptoms(url, accessToken, language_type, report_id, param) {
+function getMlSymptoms(url, accessToken, language_type, report_id, param) {
     parameter = {
         'report_id': report_id,
         'param': param,
@@ -124,7 +125,7 @@ function symptomSelect(url, accessToken, report_id, symptom_id) {
     });
 }
 
-// ========== Symptom Selection : Departments ==========
+// ========== Symptom Selection : Get Departments ==========
 /*
     <parameters>
     url : /v1/symptom/departments

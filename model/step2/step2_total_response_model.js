@@ -12,6 +12,7 @@ class Step2TotalResponseModel {
         } catch (e) {
             this.step2_selection_list = null;
         }
+        this.step2_scenario_end = data.step2_scenario_end;
     }
 }
 

@@ -23,6 +23,7 @@ class Step1TotalResponseModel {
         } catch (e) {
             this.step1_sub_qusetion_list = null;
         }
+        this.step1_scenario_end = data.step1_scenario_end;
     }
 }
 

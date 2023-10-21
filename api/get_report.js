@@ -1,43 +1,63 @@
 var request = require('request')
+var constant = require('../constant')
 var baseResponseModel = require('../model/base_response_model')
 var reportResponseModel = require('../model/report/report_response_model')
-apiUrl = 'https://api.infomining-dev.com/rest_api'
-accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTY1OTUzMjksImlhdCI6MTY5NjU5MzUyOSwiY29tcGFueV9pZHgiOjE1LCJwcm9qZWN0X2lkeCI6NTAsImFwaV9pbmZvIjpbeyJhcGlfdHlwZSI6MCwic3Vic2NyaWJlX3JhbmsiOjEsInN1YnNjcmliZV90eXBlIjoyfV19.4V6vaO0FNLuS9BLjnnoYp5KhfO4YgmxIdExm7Anb3eM'
-refreshToken = 'LDTMm1hWcf/sxoaS/utwJajCqpwP4xkW89E7qWG5EbptBh1d4LiFfUlLX/WjPSVEYG3pt1KfgJLOG67eiDcm9g0wG/oq31syBv2va3elV5o1'
-reportId = 'report_58_41ec4d60-0706-4cc1-b7bf-7a09ed890262_20230808115843'
-report_type = 'report' //report, question
-ContentType = 'application/x-www-form-urlencoded'
 
 if (require.main === module) {
     main();
 }
 
 function main() {
-    getReport(
-        url = apiUrl + '/v1/report/get_report',
-        accessToken = accessToken,
-        report_id = reportId,
-        report_type = report_type,
+    // getReportBasic(
+    //     accessToken = constant.accessToken,
+    //     report_id = constant.reportId,
+    // )
+    getReportMedical(
+        accessToken = constant.accessToken,
+        report_id = constant.reportId,
     )
 }
 
-// ========== Get Report : Get Report  ==========
-/*
-    <parameters>
-    url : /v1/report/get_report
-    accessToken : OAuth2.0 accessToken (auth.js > getAccessToken())
-    report_id : identifier of report
-    report_type : type of report(report, question)
-*/
-function getReport(url, accessToken, report_id, report_type) {
+/**
+ * @apiNote
+ *   GetReportBasic (You can view the report as a basic type.)
+ *
+ * @param accessToken <- Your_Access_Token (required)
+ * @param reportId <- identifier of the report (required)
+ */
+function getReportBasic(accessToken, report_id) {
     const options = {
-        uri: url,
+        uri: constant.getReportUrl + '/v1/report/reportBasic',
         headers: {
             'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': constant.contentType,
         },
         qs: {
             'report_id': report_id,
-            'report_type': report_type,
+        }
+    };
+    request.get(options, function (e, response, body) {
+        const base = new baseResponseModel.BaseResponseModel(JSON.parse(response.body), reportResponseModel.ReportResponseModel, true);
+        console.log(JSON.stringify(base));
+    });
+}
+
+/**
+ * @apiNote
+ *   GetReportMedical (You can view the report as a medical type.)
+ *
+ * @param accessToken <- Your_Access_Token (required)
+ * @param reportId <- identifier of the report (required)
+ */
+function getReportMedical(accessToken, report_id) {
+    const options = {
+        uri: constant.getReportUrl + '/v1/report/reportBasic',
+        headers: {
+            'Authorization': 'Bearer ' + accessToken,
+            'Content-Type': constant.contentType,
+        },
+        qs: {
+            'report_id': report_id,
         }
     };
     request.get(options, function (e, response, body) {

@@ -1,36 +1,31 @@
 var request = require('request')
+var constant = require('../constant')
 var baseResponseModel = require('../model/base_response_model')
 var authTokenResponseModel = require('../model/auth/auth_token_response_model')
-authUrl = 'https://auth.infomining-cloud.com'
-projectId = 'inviting_project-ZJN438549'
-secretKey = 'JQcirsiaKRU5i850hDpywF0oyYfHvsxL'
-accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTcxOTAwNzgsImlhdCI6MTY5NzE4ODI3OCwiY29tcGFueV9pZHgiOjE1LCJwcm9qZWN0X2lkeCI6NTAsImFwaV9pbmZvIjpbeyJhcGlfdHlwZSI6MCwic3Vic2NyaWJlX3JhbmsiOjEsInN1YnNjcmliZV90eXBlIjoyfV19.5Sbk3tRiKeODNL1LlLJJSD3UOY9VSjmqq-Vs_7eGnbQ'
-refreshToken = 'IPMFUda9skBXqFcWYtdE3pmxAukzs9Bc842RVA+ceetUoDgWESWeNUUJOawenFYihGg1oGR34g90FoCEvX4CUKYetUl0plFrRRU/cmbd1mz1QZ7FNsUBWqR4QpxOMqoV0'
-ContentType = 'application/x-www-form-urlencoded'
 
 if (require.main === module) {
     main();
 }
 
 function main() {
-    getAccessToken(authUrl + '/v1/auth/token', projectId, secretKey);
-    // getAccessTokenUsingRefreshToken(authUrl + '/v1/auth/refresh_token', refreshToken);
+    getAccessToken(constant.projectId, constant.secretKey);
+    // getAccessTokenUsingRefreshToken(constant.refreshToken);
 }
 
-// ========== OAuth 2.0 : Get Access Token  ==========
-/*
-    <parameters>
-    url : /v1/auth/token
-    projectId : project ID
-    secretKey : project secret key
-*/
-function getAccessToken(url, projectId, secretKey) {
+/**
+ * @apiNote
+ *   OAuth 2.0 : Get Access Token
+ *   path: /v1/auth/token
+ *
+ * @param authorization <- Basic {base64_encode(Project-id:Secret-Key)} (required)
+ *    "Basic " + Base64.getEncoder().encodeToString((Project-id:Secret-Key).getBytes())
+ */
+function getAccessToken(projectId, secretKey) {
     const options = {
-        uri: url,
+        uri: constant.authUrl + '/v1/auth/token',
         headers: {
-            'Project-Id': projectId,
-            'Secret-Key': secretKey,
-            'Content-Type': ContentType,
+            'Content-Type': constant.contentType,
+            'Authorization': 'Basic ' + Buffer.from(projectId + ':' + secretKey).toString('base64'),
         },
     };
     request.post(options, function(e, response, body){
@@ -39,18 +34,19 @@ function getAccessToken(url, projectId, secretKey) {
     });
 } 
   
-// ========== OAuth 2.0 : Get Access Token Using Refresh Token  ==========
-/*
-    <parameters>
-    url : /v1/auth/refresh_token
-    refreshToken : refresh token value
-*/
-function getAccessTokenUsingRefreshToken(url, refreshToken) {
+/**
+ * @apiNote
+ *   getAccessTokenUsingRefreshToken
+ *   path: /v1/auth/refreshToken
+ *
+ * @param refreshToken <- Your_Refresh_Token (required)
+ */
+function getAccessTokenUsingRefreshToken(refreshToken) {
     const options = {
-        uri: url,
+        uri: constant.authUrl + '/v1/auth/refreshToken',
         headers: {
             'Refresh-Token': refreshToken,
-            'Content-Type': ContentType,
+            'Content-Type': constant.contentType,
         },
     };
     request.post(options, function(e, response, body){

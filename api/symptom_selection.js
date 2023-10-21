@@ -1,11 +1,9 @@
 var request = require('request')
+var constant = require('../constant')
 var baseResponseModel = require('../model/base_response_model')
 var symptomResponseModel = require('../model/symptom/symptom_response_model')
 var step2DepartmentsResponseModel = require('../model/step2/step2_departments_response_model')
-apiUrl = 'https://api.infomining-dev.com/rest_api'
-accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTY1OTUzMjksImlhdCI6MTY5NjU5MzUyOSwiY29tcGFueV9pZHgiOjE1LCJwcm9qZWN0X2lkeCI6NTAsImFwaV9pbmZvIjpbeyJhcGlfdHlwZSI6MCwic3Vic2NyaWJlX3JhbmsiOjEsInN1YnNjcmliZV90eXBlIjoyfV19.4V6vaO0FNLuS9BLjnnoYp5KhfO4YgmxIdExm7Anb3eM'
-reportId = 'report_58_41ec4d60-0706-4cc1-b7bf-7a09ed890262_20230808115843'
-ContentType = 'application/x-www-form-urlencoded'
+var statusResponseModel = require('../model/status_response_model')
 
 if (require.main === module) {
     main();
@@ -13,54 +11,51 @@ if (require.main === module) {
 
 function main() {
     // getSymptoms(
-    //     url = apiUrl + '/v1/symptom/symptoms',
-    //     accessToken = accessToken,
-    //     language_type = 'kr',
-    //     report_id = reportId,
-    //     param = '배가',
+    //     accessToken = constant.accessToken,
+    //     report_id = constant.reportId,
+    //     language_type = constant.language_type,
+    //     search_txt = '배가',
     // )
-    // getMlSymptoms(
-    //     url = apiUrl + '/v1/symptom/MLsymptoms',
-    //     accessToken = accessToken,
-    //     language_type = 'kr',
-    //     report_id = reportId,
-    //     param = '배가',
+    // getNLPSymptoms(
+    //     accessToken = constant.accessToken,
+    //     language_type = constant.language_type,
+    //     report_id = constant.reportId,
+    //     search_txt = '배가',
     // )
-    // symptomSelect(
-    //     url = apiUrl + '/v1/report/step2/symptomSelect',
-    //     accessToken = accessToken,
-    //     report_id = reportId,
-    //     symptom_id = symptom_id,
+    // symptomSelection(
+    //     accessToken = constant.accessToken,
+    //     report_id = constant.reportId,
+    //     symptom_id = constant.symptom_id,
     // )
     // getDepartments(
-    //     url = apiUrl + '/v1/step2/departments',
-    //     accessToken = accessToken,
-    //     language_type = 'kr',
-    //     report_id = reportId,
+    //     accessToken = constant.accessToken,
+    //     report_id = constant.reportId,
+    //     language_type = constant.language_type,
     // )
 }
 
-// ========== Symptom Selection : Get Symptoms ==========
-/*
-    <parameters>
-    url : /v1/symptom/symptoms
-    language_type : 'kr', 'en'(None : 'en')
-    report_id : identifier of report
-    param : search keyword
-*/
-function getSymptoms(url, accessToken, language_type, report_id, param) {
+/**
+ * @apiNote
+ *   Symptom Search
+ *
+ * @param accessToken <- Your_Access_Token (required)
+ * @param report_id <- identifier of the report (required)
+ * @param language_type <- ex) kr, en (optional)
+ * @param search_txt <- search word (required)
+ */
+function getSymptoms(accessToken, report_id, language_type, search_txt) {
     parameter = {
         'report_id': report_id,
-        'param': param,
+        'search_txt': search_txt,
     }
     if (language_type != null) {
         parameter['language_type'] = language_type;
     }
     const options = {
-        uri: url,
+        uri: constant.symptomSelectionUrl + '/v1/symptom/symptomList',
         headers: {
             'Authorization': 'Bearer ' + accessToken,
-            'Content-Type': ContentType,
+            'Content-Type': constant.contentType,
         },
         qs: parameter
     };
@@ -70,27 +65,28 @@ function getSymptoms(url, accessToken, language_type, report_id, param) {
     });
 }
 
-// ========== Symptom Selection : Get ML Symptoms ==========
-/*
-    <parameters>
-    url : /v1/symptom/MLsymptoms
-    language_type : 'kr', 'en'(None : 'en')
-    report_id : identifier of report
-    param : search keyword
-*/
-function getMlSymptoms(url, accessToken, language_type, report_id, param) {
+/**
+ * @apiNote
+ *   Machine learning Symptom Search
+ *
+ * @param accessToken <- Your_Access_Token (required)
+ * @param report_id <- identifier of the report (required)
+ * @param languageType <- ex) kr, en (optional)
+ * @param search_txt <- search word (required)
+ */
+function getNLPSymptoms(accessToken, report_id, language_type, search_txt) {
     parameter = {
         'report_id': report_id,
-        'param': param,
+        'search_txt': search_txt,
     }
     if (language_type != null) {
         parameter['language_type'] = language_type;
     }
     const options = {
-        uri: url,
+        uri: constant.symptomSelectionUrl + '/v1/symptom/MLsymptoms',
         headers: {
             'Authorization': 'Bearer ' + accessToken,
-            'Content-Type': ContentType,
+            'Content-Type': constant.contentType,
         },
         qs: parameter
     };
@@ -100,19 +96,20 @@ function getMlSymptoms(url, accessToken, language_type, report_id, param) {
     });
 }
 
-// ========== Symptom Selection : Symptom Select ==========
-/*
-    <parameters>
-    url : /v1/report/symptom/symptomSelect
-    report_id : identifier of report
-    symptom_id : identifier of symptom
-*/
-function symptomSelect(url, accessToken, report_id, symptom_id) {
+/**
+ * @apiNote
+ *   Save Symptom Selection Report
+ *
+ * @param accessToken <- Your_Access_Token (required)
+ * @param report_id <- identifier of the report (required)
+ * @param symptom_id <- identifier of the symptom (required)
+ */
+function symptomSelection(accessToken, report_id, symptom_id) {
     const options = {
-        uri: url,
+        uri: constant.symptomSelectionUrl + '/v1/report/symptom/symptomSelect',
         headers: {
             'Authorization': 'Bearer ' + accessToken,
-            'Content-Type': ContentType,
+            'Content-Type': constant.contentType,
         },
         qs: {
             'report_id': report_id,
@@ -125,14 +122,15 @@ function symptomSelect(url, accessToken, report_id, symptom_id) {
     });
 }
 
-// ========== Symptom Selection : Get Departments ==========
-/*
-    <parameters>
-    url : /v1/symptom/departments
-    language_type : 'kr', 'en'(None : 'en')
-    report_id : identifier of report
-*/
-function getDepartments(url, accessToken, language_type, report_id) {
+/**
+ * @apiNote
+ *   a list of medical departments by report
+ *
+ * @param accessToken <- Your_Access_Token (required)
+ * @param reportId <- identifier of the report (required)
+ * @param languageType <- ex) kr, en (optional)
+ */
+function getDepartments(accessToken, report_id, language_type) {
     parameter = {
         'report_id': report_id,
     }
@@ -140,10 +138,10 @@ function getDepartments(url, accessToken, language_type, report_id) {
         parameter['language_type'] = language_type;
     }
     const options = {
-        uri: url,
+        uri: constant.symptomSelectionUrl + '/v1/report/departments',
         headers: {
             'Authorization': 'Bearer ' + accessToken,
-            'Content-Type': ContentType,
+            'Content-Type': constant.contentType,
         },
         qs: parameter
     };

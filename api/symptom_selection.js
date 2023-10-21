@@ -16,17 +16,17 @@ function main() {
     //     language_type = constant.language_type,
     //     search_txt = '배가',
     // )
-    // getNLPSymptoms(
-    //     accessToken = constant.accessToken,
-    //     language_type = constant.language_type,
-    //     report_id = constant.reportId,
-    //     search_txt = '배가',
-    // )
-    // symptomSelection(
-    //     accessToken = constant.accessToken,
-    //     report_id = constant.reportId,
-    //     symptom_id = constant.symptom_id,
-    // )
+    getNLPSymptoms(
+        accessToken = constant.accessToken,
+        language_type = constant.language_type,
+        report_id = constant.reportId,
+        search_txt = '배가',
+    )
+    symptomSelection(
+        accessToken = constant.accessToken,
+        report_id = constant.reportId,
+        symptom_id = constant.symptom_id,
+    )
     // getDepartments(
     //     accessToken = constant.accessToken,
     //     report_id = constant.reportId,
@@ -83,7 +83,7 @@ function getNLPSymptoms(accessToken, report_id, language_type, search_txt) {
         parameter['language_type'] = language_type;
     }
     const options = {
-        uri: constant.symptomSelectionUrl + '/v1/symptom/MLsymptoms',
+        uri: constant.symptomSelectionUrl + '/v1/symptom/NLPSymptomList',
         headers: {
             'Authorization': 'Bearer ' + accessToken,
             'Content-Type': constant.contentType,
@@ -106,7 +106,7 @@ function getNLPSymptoms(accessToken, report_id, language_type, search_txt) {
  */
 function symptomSelection(accessToken, report_id, symptom_id) {
     const options = {
-        uri: constant.symptomSelectionUrl + '/v1/report/symptom/symptomSelect',
+        uri: constant.symptomSelectionUrl + '/v1/symptom/symptomSelect',
         headers: {
             'Authorization': 'Bearer ' + accessToken,
             'Content-Type': constant.contentType,

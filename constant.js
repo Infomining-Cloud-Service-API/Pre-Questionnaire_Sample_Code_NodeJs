@@ -8,7 +8,7 @@ module.exports = {
     symptomSelectionUrl: 'https://api.infomining-dev.com/rest_api',
     projectId: 'inviting_project-ZJN438549',
     secretKey: 'JQcirsiaKRU5i850hDpywF0oyYfHvsxL',
-    accessToken: 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTc4NzkxNTUsImlhdCI6MTY5Nzg3NzM1NSwiY29tcGFueV9pZHgiOjE1LCJwcm9qZWN0X2lkeCI6NTAsImFwaV9pbmZvIjpbeyJhcGlfdHlwZSI6MCwic3Vic2NyaWJlX3JhbmsiOjEsInN1YnNjcmliZV90eXBlIjoyfV19.4awx41Ze0EHQ44JmK-SzdII8czaxePUlnT46SnSOaEU',
+    accessToken: 'eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTc4ODIyMzcsImlhdCI6MTY5Nzg4MDQzNywiY29tcGFueV9pZHgiOjE1LCJwcm9qZWN0X2lkeCI6NTAsImFwaV9pbmZvIjpbeyJhcGlfdHlwZSI6MCwic3Vic2NyaWJlX3JhbmsiOjEsInN1YnNjcmliZV90eXBlIjoyfV19.PGbJ24vj5p_IRePfsZ8db5cS0IK8RhzUKhDgl2CTmuQ',
     refreshToken: 'tazkWjtXoHI2V6etyEO85sHWDhXntCVRQg1LWushcXeA/8TjmXN8v2DzYXlDwvU4ZwCQVWDtB06d8kjb5ruC1aqA59RcZWrBueZgskLuP4lJaCZC5klz0kLIezp0cTnd0',
     contentType: 'application/x-www-form-urlencoded',
     jsonContentType: 'application/json',

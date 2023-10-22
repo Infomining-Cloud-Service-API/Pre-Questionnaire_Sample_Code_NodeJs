@@ -6,7 +6,6 @@ class Step3QuestionResponseModel {
         this.step3_report_type = data.step3_report_type; // Step 3 Reporting Category for Questions
         this.step3_answer_type = data.step3_answer_type; // QuestionType ex) Subjective, Objective
         this.step3_max_selection_count = data.step3_max_selection_count; // Maximum number of choices for optional questions
-        this.step3_follow_up_id = data.step3_follow_up_id; // Step3 Additional Question Identifiers for Questions
     }
 }
 

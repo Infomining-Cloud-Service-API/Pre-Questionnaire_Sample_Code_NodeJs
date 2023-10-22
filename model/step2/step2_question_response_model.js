@@ -6,7 +6,6 @@ class Step2QuestionResponseModel {
         this.step2_report_type = data.step2_report_type;  // Step 2 Reporting Category for Questions
         this.step2_answer_type = data.step2_answer_type;  // QuestionType ex) Subjective, Objective
         this.step2_max_selection_count = data.step2_max_selection_count;  // Maximum number of choices for optional questions
-        this.step2_branch_bool = data.step2_branch_bool;  // Whether of scenario questions
 
         // Step2 Sample image list when image type question
         try {

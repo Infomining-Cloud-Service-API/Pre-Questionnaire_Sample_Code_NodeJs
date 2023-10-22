@@ -18,7 +18,7 @@ function main() {
  *   path: /v1/auth/token
  *
  * @param authorization <- Basic {base64_encode(Project-id:Secret-Key)} (required)
- *    "Basic " + Base64.getEncoder().encodeToString((Project-id:Secret-Key).getBytes())
+ *    "Basic " + Buffer.from(projectId + ':' + secretKey).toString('base64')
  */
 function getAccessToken(projectId, secretKey) {
     const options = {

@@ -22,7 +22,7 @@ function main() {
  */
 function getAccessToken(projectId, secretKey) {
     const options = {
-        uri: constant.authUrl + '/v1/auth/token',
+        uri: constant.authUrl + '/v1/auth/accessToken',
         headers: {
             'Content-Type': constant.contentType,
             'Authorization': 'Basic ' + Buffer.from(projectId + ':' + secretKey).toString('base64'),

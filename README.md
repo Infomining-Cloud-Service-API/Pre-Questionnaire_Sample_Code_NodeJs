@@ -122,102 +122,82 @@ End Point : **v1/auth/refreshToken**
 
 # PREPARATION SCENARIO
 
-## #Report Start
+<br>
 
+## #Report Start
 
 <br>
 
 ## #Report Start With Profile
 
-
 <br>
 <br>
-
 
 # STEP1 SCENARIO ENDPOINT
-
 
 <br>
 
 ## #Get Question
 
-
 <br>
 
 ## #Get History
 
-
 <br>
 <br>
-
 
 # SYMPTOM SELECTION
-
 
 <br>
 
 ## #Get Symptoms
 
-
 <br>
 
 ## #Get NLP Symptoms
-
 
 <br>
 
 ## #Symptom Select
 
-
 <br>
 
 ## #Get Departments
-
 
 <br>
 <br>
 
 # STEP2 SCENARIO ENDPOINT
 
-
 <br>
 
 ## #Get Qusetion
-
 
 <br>
 
 ## #Get History
 
-
 <br>
 <br>
-
 
 # STEP3 SCENARIO ENDPOINT
 
-
 <br>
 
 ## #Get Qusetion
-
 
 <br>
 
 ## #Get History
 
-
 <br>
 <br>
-
 
 # GET REPORT ENDPOINT
-
 
 <br>
 
 ## #Get Report Basic
-
 
 <br>
 

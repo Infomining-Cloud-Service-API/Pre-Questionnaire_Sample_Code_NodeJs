@@ -57,7 +57,7 @@
 <br>
 <br>
 
-<span style="color:#3D6FD1">Infomining Cloud API는 OAuth 2.0 표준</span>을 서비스 구조에 따라 클라이언트 자격증빙 방식으로 변경하여 인증을 진행합니다.
+**Infomining Cloud API는 OAuth 2.0 표준**을 서비스 구조에 따라 클라이언트 자격증빙 방식으로 변경하여 인증을 진행합니다.
 
 <br>
 <br>
@@ -80,12 +80,12 @@
 
 <br>
 
-<span style="color:#5b88b9">#Get Access Token과 #Get Access Token Using Refresh Token에서는 accessToken 을 발급받는 프로세스와 관련된 End Point의 상세 스펙과 호출방식에 대해 안내합니다.</span>
+**#Get Access Token과 #Get Access Token Using Refresh Token에서는 accessToken 을 발급받는 프로세스와 관련된 End Point의 상세 스펙과 호출방식에 대해 안내합니다.**
 
 <br>
 <br>
 
-인증과 관련된 자세한 내용은 <span style="color:#3D6FD1">Develop Document > Api Common Guid > Authentication</span> 에서 확인하실 수 있습니다.
+인증과 관련된 자세한 내용은 **Develop Document > Api Common Guid > Authentication** 에서 확인하실 수 있습니다.
 
 <br>
 <br>
@@ -96,7 +96,7 @@
 <br>
 Access Token은 발급 후 20분이 지나면 사용할 수 없으므로 만료시에는
 <br>
-<span style="color:#195ddd">v1/auth/refreshToken EndPoint(Get Access Token using Refresh Token)</span> 를 활용해 재발급 받을 수 있습니다.
+**v1/auth/refreshToken EndPoint(Get Access Token using Refresh Token)** 를 활용해 재발급 받을 수 있습니다.
 
 
 <br>
@@ -104,4 +104,4 @@ Access Token은 발급 후 20분이 지나면 사용할 수 없으므로 만료�
 
 |||
 |---|---|
-**End Point**|<span style="color:#2E6DE8">v1/auth/token</span>
+End Point|**v1/auth/token**

@@ -90,7 +90,7 @@
 <br>
 <br>
 
-# #Get Access Token
+## #Get Access Token
 
 프로젝트 단위로 발급받은 인증키(ProjectID, SecretKey)를 사용하여 실제로 API를 호출할 때사용되는 사용자 토큰(AccessToken, Refresh Token)을 요청합니다.
 <br>
@@ -101,7 +101,124 @@ Access Token은 발급 후 20분이 지나면 사용할 수 없으므로 만료�
 
 <br>
 
+End Point : **v1/auth/token**
 
-|||
-|---|---|
-End Point|**v1/auth/token**
+<br>
+<br>
+
+## #Get Access Token Using Refresh Token
+
+이미 Access Token을 발급 받았다면 Refresh Token을 사용하여 간편하게 만료된 Access Token을 재발급 할 수 있습니다.<br>Refresh Token은 발급후 7일간 유효하므로 데이터 베이스나 글로벌 변수에 저장하여 재사용하는 것을 권장합니다.<br>Refresh Token이 만료된이후에는 **v1/auth/accessToken** End Point를 통해 재발급 받을 수 있습니다.<br>API를 호출할때마다 AccessToken 발급을 요청하는 것은 퍼포먼스에 부정적이므로 만료시에만 재발급하도록 로직 구현 바랍니다.
+
+
+<br>
+
+End Point : **v1/auth/refreshToken**
+
+
+<br>
+<br>
+
+
+# PREPARATION SCENARIO
+
+## #Report Start
+
+
+<br>
+
+## #Report Start With Profile
+
+
+<br>
+<br>
+
+
+# STEP1 SCENARIO ENDPOINT
+
+
+<br>
+
+## #Get Question
+
+
+<br>
+
+## #Get History
+
+
+<br>
+<br>
+
+
+# SYMPTOM SELECTION
+
+
+<br>
+
+## #Get Symptoms
+
+
+<br>
+
+## #Get NLP Symptoms
+
+
+<br>
+
+## #Symptom Select
+
+
+<br>
+
+## #Get Departments
+
+
+<br>
+<br>
+
+# STEP2 SCENARIO ENDPOINT
+
+
+<br>
+
+## #Get Qusetion
+
+
+<br>
+
+## #Get History
+
+
+<br>
+<br>
+
+
+# STEP3 SCENARIO ENDPOINT
+
+
+<br>
+
+## #Get Qusetion
+
+
+<br>
+
+## #Get History
+
+
+<br>
+<br>
+
+
+# GET REPORT ENDPOINT
+
+
+<br>
+
+## #Get Report Basic
+
+
+<br>
+
+## #Get Report Medical

@@ -51,7 +51,7 @@ function getReportBasic(accessToken, report_id) {
  */
 function getReportMedical(accessToken, report_id) {
     const options = {
-        uri: constant.getReportUrl + '/v1/report/reportBasic',
+        uri: constant.getReportUrl + '/v1/report/reportMedical',
         headers: {
             'Authorization': 'Bearer ' + accessToken,
             'Content-Type': constant.contentType,

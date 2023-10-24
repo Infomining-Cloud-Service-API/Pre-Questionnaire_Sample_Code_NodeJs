@@ -8,26 +8,26 @@ if (require.main === module) {
 }
 
 function main() {
-    // getReportBasic(
+    // getBasicReport(
     //     accessToken = constant.accessToken,
     //     report_id = constant.reportId,
     // )
-    getReportMedical(
-        accessToken = constant.accessToken,
-        report_id = constant.reportId,
-    )
+    // getMedicalReport(
+    //     accessToken = constant.accessToken,
+    //     report_id = constant.reportId,
+    // )
 }
 
 /**
  * @apiNote
- *   GetReportBasic (You can view the report as a basic type.)
+ *   GetBasicReport (You can view the report as a basic type.)
  *
  * @param accessToken <- Your_Access_Token (required)
  * @param reportId <- identifier of the report (required)
  */
-function getReportBasic(accessToken, report_id) {
+function getBasicReport(accessToken, report_id) {
     const options = {
-        uri: constant.getReportUrl + '/v1/report/reportBasic',
+        uri: constant.getReportUrl + '/v1/report/basicReport',
         headers: {
             'Authorization': 'Bearer ' + accessToken,
             'Content-Type': constant.contentType,
@@ -44,14 +44,14 @@ function getReportBasic(accessToken, report_id) {
 
 /**
  * @apiNote
- *   GetReportMedical (You can view the report as a medical type.)
+ *   GetMedicalReport (You can view the report as a medical type.)
  *
  * @param accessToken <- Your_Access_Token (required)
  * @param reportId <- identifier of the report (required)
  */
-function getReportMedical(accessToken, report_id) {
+function getMedicalReport(accessToken, report_id) {
     const options = {
-        uri: constant.getReportUrl + '/v1/report/reportMedical',
+        uri: constant.getReportUrl + '/v1/report/medicalReport',
         headers: {
             'Authorization': 'Bearer ' + accessToken,
             'Content-Type': constant.contentType,

@@ -4,12 +4,12 @@ class ReportContentResponseModel {
         this.report_type = data.report_type;
         try {
             let res = []
-            for (let i = 0; i < data.report_answer.length; i++) {
-                res.push(new reportAnswerResponseModel.ReportAnswerResponseModel(data.report_answer[i]));
+            for (let i = 0; i < data.report_answer_list.length; i++) {
+                res.push(new reportAnswerResponseModel.ReportAnswerResponseModel(data.report_answer_list[i]));
             }
-            this.report_answer = res;
+            this.report_answer_list = res;
         } catch (e) {
-            this.report_answer = null;
+            this.report_answer_list = null;
         }
     }
 }
